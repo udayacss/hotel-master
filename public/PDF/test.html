@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Usage Calculator</title>
+    <style>
+        .range-label {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="electricityForm">
+        <label for="monthlyUsage" style="font-weight: bold; font-family:poppins">Monthly Unit Usage (kWh):</label>
+        <br>
+        <span id="usageDisplay">1 kWh</span><br>
+        <input type="range" id="monthlyUsage" name="monthlyUsage" min="1" max="1500" step="1" value="1" oninput="calculateCost()">
+        <br>
+        <p>Your Monthly Bill (Rs): <span id="costDisplay" style="font-family: poppins">716.00</span></p>
+        <p>Best Solar Power KWp (KWp): <span id="powerDisplay" style="font-family: poppins">0.00</span></p>
+    </form>
+        <input type="radio" name="usageType" value="Domestic" checked> Domestic
+        <input type="radio" name="usageType" value="Commercial"> Commercial
+        <br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="location">Site Location:</label>
+        <input type="text" id="location" name="location" required><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+       function calculateCost() {
+            // Get the value of the range slider
+            const monthlyUsage = parseInt(document.getElementById("monthlyUsage").value);
+            
+            // Update the displayed usage
+            document.getElementById("usageDisplay").textContent = monthlyUsage + " kWh";
+
+            // Define the base price and additional cost per kWh
+            const basePrice = 716.00;
+            const additionalCost = 46.00;
+
+            // Calculate the cost
+            const cost = (basePrice + (monthlyUsage - 1) * additionalCost).toFixed(2);
+            const power = (basePrice + (monthlyUsage - 1) * additionalCost).toFixed(2);
+            
+            // Display the cost
+            document.getElementById("costDisplay").textContent = cost;
+            document.getElementById("powerDisplay").textContent = power;
+        }
+
+        document.getElementById("electricityForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get customer details
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const location = document.getElementById("location").value;
+            const message = document.getElementById("message").value;
+
+            // Construct email body
+            const emailBody = `
+                Name: ${name}
+                E-mail: ${email}
+                Phone: ${phone}
+                Site Location: ${location}
+                Message: ${message}
+                Monthly Unit Usage (kWh): ${document.getElementById("monthlyUsage").value}
+                Usage Type: ${usageType}
+                Cost (Rs): ${document.getElementById("costDisplay").textContent}
+            `;
+
+            // Send email (You will need backend code to send emails)
+            // For example, you can use Node.js with Nodemailer
+
+            alert("Customer details submitted successfully!");
+        });
+    </script>
+</body>
+</html>
