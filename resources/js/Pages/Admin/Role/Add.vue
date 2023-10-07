@@ -15,21 +15,15 @@
                                             <a
                                                 class="nav-link active"
                                                 data-toggle="pill"
-                                                href="#personal-information"
+                                                href="#roleinfo"
                                             >
-                                                User Create
+                                                {{
+                                                    role
+                                                        ? "Role Update"
+                                                        : "Role Create"
+                                                }}
                                             </a>
                                         </li>
-
-                                        <!-- <li class="col-md-3 p-0">
-                                            <a
-                                                class="nav-link"
-                                                data-toggle="pill"
-                                                href="#emailandsms"
-                                            >
-                                                Roles
-                                            </a>
-                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -40,121 +34,7 @@
                             <div class="tab-content">
                                 <div
                                     class="tab-pane fade active show"
-                                    id="personal-information"
-                                    role="tabpanel"
-                                >
-                                    <div class="iq-card">
-                                        <div
-                                            class="iq-card-header d-flex justify-content-between"
-                                        >
-                                            <div class="iq-header-title">
-                                                <h4 class="card-title">
-                                                    Create User
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div class="iq-card-body">
-                                            <form>
-                                                <div
-                                                    class="row align-items-center"
-                                                >
-                                                    <div
-                                                        class="form-group col-sm-6"
-                                                    >
-                                                        <label for="fname"
-                                                            >Email:</label
-                                                        >
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                             v-model="form.email"
-                                                            placeholder="Email"
-                                                        />
-                                                    </div>
-
-                                                    <div
-                                                        class="form-group col-sm-6"
-                                                    >
-                                                        <label>Role:</label>
-                                                        <select
-                                                            class="form-control"
-                                                            v-model="form.role"
-                                                        >
-                                                            <option v-for="(role,index) in v_roles" :key="index">
-                                                                {{role.name}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- <div
-                                                        class="form-group col-sm-6"
-                                                    >
-                                                        <label>Country:</label>
-                                                        <select
-                                                            class="form-control"
-                                                            id="exampleFormControlSelect3"
-                                                        >
-                                                            <option>
-                                                                Caneda
-                                                            </option>
-                                                            <option>
-                                                                Noida
-                                                            </option>
-                                                            <option selected="">
-                                                                USA
-                                                            </option>
-                                                            <option>
-                                                                India
-                                                            </option>
-                                                            <option>
-                                                                Africa
-                                                            </option>
-                                                        </select>
-                                                    </div> -->
-                                                </div>
-                                                <div
-                                                    class="form-group row align-items-center"
-                                                >
-                                                    <label
-                                                        class="col-md-3"
-                                                        for="emailnotification"
-                                                        >Email
-                                                        Notification:</label
-                                                    >
-                                                    <div
-                                                        class="col-md-9 custom-control custom-switch"
-                                                    >
-                                                        <input
-                                                            type="checkbox"
-                                                            class="custom-control-input"
-                                                            id="emailnotification"
-                                                            checked=""
-                                                        />
-                                                        <label
-                                                            class="custom-control-label"
-                                                            for="emailnotification"
-                                                        ></label>
-                                                    </div>
-                                                </div>
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-primary mr-2"
-                                                >
-                                                    Submit
-                                                </button>
-                                                <button
-                                                    type="reset"
-                                                    class="btn iq-bg-danger"
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- <div
-                                    class="tab-pane fade"
-                                    id="emailandsms"
+                                    id="roleinfo"
                                     role="tabpanel"
                                 >
                                     <div class="iq-card">
@@ -181,8 +61,27 @@
                                                         <input
                                                             type="text"
                                                             class="form-control"
+                                                            v-model="
+                                                                form.role_name
+                                                            "
                                                             placeholder="Role Name"
                                                         />
+                                                        <div
+                                                            class="alert alert-danger mt-1 col-sm-12"
+                                                            role="alert"
+                                                            v-if="
+                                                                errors.role_name
+                                                            "
+                                                        >
+                                                            <div
+                                                                class="iq-alert-text"
+                                                            >
+                                                                {{
+                                                                    errors
+                                                                        .role_name[0]
+                                                                }}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -213,7 +112,8 @@
                                                                 "
                                                                 @click="
                                                                     selectAll(
-                                                                        section,$event
+                                                                        section,
+                                                                        $event
                                                                     )
                                                                 "
                                                             />
@@ -240,7 +140,7 @@
                                                                 type="checkbox"
                                                                 class="custom-control-input"
                                                                 v-model="
-                                                                    selected_permissions
+                                                                    form.selected_permissions
                                                                 "
                                                                 :id="
                                                                     'permission' +
@@ -268,11 +168,20 @@
                                                 </div>
 
                                                 <button
+                                                    v-if="!role"
                                                     type="button"
                                                     @click="submitRole"
                                                     class="btn btn-primary mr-2"
                                                 >
                                                     Submit
+                                                </button>
+                                                <button
+                                                    v-if="role"
+                                                    type="button"
+                                                    @click="updateRole"
+                                                    class="btn btn-primary mr-2"
+                                                >
+                                                    Update
                                                 </button>
                                                 <button
                                                     type="reset"
@@ -283,7 +192,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -296,6 +205,8 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout.vue";
 import { Link, useForm } from "@inertiajs/vue3";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default {
     components: {
@@ -303,52 +214,90 @@ export default {
     },
     props: {
         permissions: Object,
-        user_permissions : Object,
-        roles : Object,
+        role: Object,
     },
     data() {
         return {
-            v_permissions: [],
-            v_roles: this.roles,
-            selected_permissions: [],
-            all_selected: false,
-            form : useForm({
-                role: this.role ? this.role.name : null,
-                email : null,
+            v_permissions: this.permissions,
+            // all_selected: false,
+            v_role: this.role?.permissions ? this.role?.permissions : [],
+            form: useForm({
+                selected_permissions: [],
+                role_id: this.role ? this.role?.id : null,
+                role_name: this.role ? this.role.name : "",
             }),
             errors: [],
         };
     },
     mounted() {
-        this.setPermissions();
+        if (this.role?.permissions) {
+            this.setPermissions();
+        }
     },
     methods: {
         submitRole() {
-            console.log(this.selected_permissions);
+            this.submit();
+        },
+        updateRole() {
+            this.submit();
         },
         setPermissions() {
-            this.v_permissions = this.permissions;
-            // this.v_permissions.forEach((p) => {
-            //     p.checked = false;
-            // });
+            this.role.permissions.forEach((pem) => {
+                this.form.selected_permissions.push(pem.id);
+            });
         },
 
-        selectPermission() {
-            console.log(this.selected_permissions);
-        },
-        selectAll(section,event) {
+        selectPermission() {},
+        selectAll(section, event) {
             let selected_permissions_updated = [];
             section.forEach((element) => {
                 if (!event.target.checked) {
                     this.selected_permissions_updated =
-                        this.selected_permissions.filter((permission) => {
+                        this.form.selected_permissions.filter((permission) => {
                             permission != element.id;
                         });
                 } else {
+                    selected_permissions_updated =
+                        this.form.selected_permissions;
                     selected_permissions_updated.push(element.id);
                 }
             });
-            this.selected_permissions = selected_permissions_updated;
+            this.form.selected_permissions = selected_permissions_updated;
+        },
+        async submit() {
+            this.button_status = false; // setting button disable while submitting
+            try {
+                const response = await axios.post(
+                    route("admin.role.store"),
+                    this.form
+                );
+                if (response.data.success) {
+                    this.showAlert("Details Changed");
+                    this.errors = [];
+                    if (!this.role) {
+                        this.form.reset();
+                    }
+                }
+            } catch (error) {
+                if (error.response.status === 422) {
+                    // Validation error occurred
+                    this.errors = error.response.data.errors;
+                    this.button_status;
+                } else {
+                    // Handle other types of errors
+                    console.error(error);
+                    this.button_status;
+                }
+            }
+        },
+        showAlert(type) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: type,
+                showConfirmButton: false,
+                timer: 1500,
+            });
         },
     },
 };

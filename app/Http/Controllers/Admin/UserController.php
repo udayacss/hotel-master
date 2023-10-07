@@ -11,6 +11,8 @@ use Inertia\Inertia;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -27,6 +29,18 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return Inertia::render('Admin/User/Profile', compact('user'));
+    }
+
+    public function create()
+    {
+        $permissions = Permission::all();
+        $permissions = $permissions->groupBy(function ($item) {
+            return $item->section;
+        });
+        $roles = Role::all();
+        $user = Auth::user();
+        $user_permissions = [];
+        return Inertia::render('Admin/User/Add', compact('permissions','user_permissions','roles'));
     }
 
     public function changePassword(Request $request)

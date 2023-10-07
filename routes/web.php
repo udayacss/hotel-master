@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\PriceListController;
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,27 +53,19 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile');
         Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword');
         Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal');
-    });
-    Route::prefix('/quotation')->group(function () {
-        Route::get('/', [QuotationController::class, 'index'])->name('admin.quotation.index');
-        Route::post('/store', [QuotationController::class, 'store'])->name('admin.quotation.store');
-        Route::get('/create', [QuotationController::class, 'create'])->name('admin.quotation.create');
-    });
-    Route::prefix('/price-list')->group(function () {
-        Route::get('/', [PriceListController::class, 'index'])->name('admin.price_list.index');
-        Route::post('/store', [PriceListController::class, 'store'])->name('admin.price_list.store');
-        Route::get('/create', [PriceListController::class, 'create'])->name('admin.price_list.create');
+        Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit');
+        Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
     });
 
-
-    Route::prefix('/gem-cat')->group(function () {
-        Route::get('/', [GemCategoryController::class, 'list'])->name('admin.gem_cat.list');
-        Route::post('/', [GemCategoryController::class, 'store'])->name('admin.gem_cat.store');
-        Route::get('/create', [GemCategoryController::class, 'create'])->name('admin.gem_cat.create');
-        Route::get('/{id}', [GemCategoryController::class, 'edit'])->name('admin.gem_cat.edit');
-        Route::post('/update', [GemCategoryController::class, 'update'])->name('admin.gem_cat.update');
-        Route::delete('/{id}', [GemCategoryController::class, 'delete'])->name('admin.gem_cat.delete');
+    Route::prefix('/role')->group(function () {
+        Route::get('/', [RoleController::class, 'list'])->name('admin.role.list');
+        Route::get('/profile', [RoleController::class, 'profile'])->name('admin.role.profile');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
+        Route::get('/create', [RoleController::class, 'create'])->name('admin.role.create');
+        Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
+        Route::post('/update', [RoleController::class, 'create'])->name('admin.role.update');
     });
+   
 
     Route::prefix('/image')->group(function () {
         Route::post('/upload', [ImageController::class, 'upload'])->name('admin.image.upload');

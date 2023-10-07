@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('unit_ranges', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->integer('min')->default(0);
-            $table->integer('max')->default(0);
-            $table->integer('capacity')->default(0);
-            $table->decimal('price')->default(0);
-            $table->softDeletes();
+            $table->unsignedBigInteger('user_id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('mobile_no');
+
+            $table->tinyInteger('is_active')->default(0)->comment('0 - inactive 1= active');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unit_ranges');
+        Schema::dropIfExists('sellers');
     }
 };

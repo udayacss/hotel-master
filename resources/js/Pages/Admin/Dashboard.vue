@@ -4,10 +4,7 @@ import moment from "moment";
 
 export default {
     props: {
-        pending_quotations_count: String,
-        pending_quotations: Object,
-        quotations: Object,
-        quotations_count: String,
+      
     },
     components: {
         AppLayout,
@@ -43,7 +40,7 @@ export default {
                                     class="d-flex align-items-center justify-content-between"
                                 >
                                     <h4>
-                                        <b>{{ quotations_count }}</b>
+                                        <b>12</b>
                                     </h4>
                                     <div id="iq-chart-box1"></div>
                                     <span class="text-primary"
@@ -71,7 +68,7 @@ export default {
                                     class="d-flex align-items-center justify-content-between"
                                 >
                                     <h4>
-                                        <b>{{ pending_quotations_count }}</b>
+                                        <b>112</b>
                                     </h4>
                                     <div id="iq-chart-box3"></div>
                                     <span class="text-success"
@@ -154,7 +151,7 @@ export default {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr
+                                            <!-- <tr
                                                 v-for="(
                                                     quote, index
                                                 ) in pending_quotations"
@@ -175,7 +172,7 @@ export default {
                                                         Pending
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>

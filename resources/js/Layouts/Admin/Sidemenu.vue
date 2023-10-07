@@ -95,6 +95,24 @@ export default {
         return {
             routes: [
                 {
+                    /* Roles & Permissions section starting */
+                    name: "Roles & Permissions",
+                    permission: "roles.list",
+                    path_name: "/role",
+                    icon: "la-user-tie",
+                    id: "#roleinfo",
+                    id_n: "roleinfo",
+                    sub: [
+                        {
+                            permission: "role.list",
+                            name: "LIST",
+                            icon: "la-list",
+                            link: "admin.role.list",
+                        },
+                    ],
+                    /* User section edning */
+                },
+                {
                     /* User section starting */
                     name: "User",
                     permission: "user.list",
@@ -109,50 +127,14 @@ export default {
                             icon: "la-smile",
                             link: "admin.user.profile",
                         },
-                        // {
-                        //     permission: "user.update",
-                        //     name: "EDIT",
-                        //     icon: "la-pen-alt",
-                        //     link: "admin.user.profile",
-                        // },
-                        // {
-                        //     permission: "user.create",
-                        //     name: "ADD",
-                        //     icon: "la-plus-circle",
-                        //     link: "admin.user.profile",
-                        // },
-                        // {
-                        //     permission: "user.list",
-                        //     name: "LIST",
-                        //     icon: "la-list",
-                        //     link: "admin.user.list",
-                        // },
-                    ],
-                    /* User section edning */
-                },
-                {
-                    /* Quotation section starting */
-                    name: " Quotation",
-                    permission: "admin.quotation.create",
-                    path_name: "/quotation",
-                    icon: "la-user-tie",
-                    id: "#gem-catinfo",
-                    id_n: "gem-catinfo",
-                    sub: [
                         {
-                            permission: "admin.quotation.create",
-                            name: "ADD",
-                            icon: "la-plus-circle",
-                            link: "admin.quotation.create",
-                        },
-                        {
-                            permission: "admin.quotation.index",
+                            permission: "user.list",
                             name: "LIST",
                             icon: "la-list",
-                            link: "admin.quotation.index",
+                            link: "admin.user.list",
                         },
                     ],
-                    /*  Gem Category section edning */
+                    /* User section edning */
                 },
             ],
         };

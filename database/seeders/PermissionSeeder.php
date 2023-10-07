@@ -21,18 +21,18 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'user' => [
-                ['name' => 'user.create', 'group' => 'user'],
-                ['name' => 'user.list', 'group' => 'user'],
-                ['name' => 'user.update', 'group' => 'user'],
-                ['name' => 'user.delete', 'group' => 'user'],
-                ['name' => 'user.block', 'group' => 'user'],
+                ['name' => 'user.create', 'section' => 'user'],
+                ['name' => 'user.list', 'section' => 'user'],
+                ['name' => 'user.update', 'section' => 'user'],
+                ['name' => 'user.delete', 'section' => 'user'],
+                ['name' => 'user.block', 'section' => 'user'],
             ],
             'role' => [
-                ['name' => 'role.create', 'group' => 'role'],
-                ['name' => 'role.list', 'group' => 'role'],
-                ['name' => 'role.update', 'group' => 'role'],
-                ['name' => 'role.delete', 'group' => 'role'],
-                ['name' => 'role.block', 'group' => 'role'],
+                ['name' => 'role.create', 'section' => 'role'],
+                ['name' => 'role.list', 'section' => 'role'],
+                ['name' => 'role.update', 'section' => 'role'],
+                ['name' => 'role.delete', 'section' => 'role'],
+                ['name' => 'role.block', 'section' => 'role'],
             ],
         ];
 
@@ -42,7 +42,7 @@ class PermissionSeeder extends Seeder
                 // dd($permission[0]['name']);
                 $row = [
                     'name' => $p['name'],
-                    'group' => $p['group'],
+                    'section' => $p['section'],
                     'guard_name' => Guard::getDefaultName(static::class),
                 ];
                 if (!Permission::where('name', $p['name'])->first()) {

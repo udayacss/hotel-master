@@ -9,7 +9,7 @@
                                 class="iq-card-header d-flex justify-content-between"
                             >
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">User List</h4>
+                                    <h4 class="card-title">Role List</h4>
                                 </div>
                             </div>
                             <div class="iq-card-body">
@@ -43,7 +43,7 @@
                                             >
                                                 <Link as="button" method="get"
                                                     class="iq-bg-danger btn"
-                                                    :href="route('admin.user.create')"
+                                                    :href="route('admin.role.create')"
                                                 >
                                                     ADD NEW
                                                 </Link>
@@ -76,76 +76,36 @@
                                     >
                                         <thead>
                                             <tr>
-                                                <th>Profile</th>
                                                 <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Email</th>
-                                                <th>Country</th>
-                                                <th>Status</th>
-                                                <th>Company</th>
-                                                <th>Join Date</th>
+                                               
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr
-                                                v-for="(user, index) in users"
+                                                v-for="(role, index) in roles"
                                                 :key="index"
                                             >
-                                                <td class="text-center">
-                                                    <img
-                                                        class="rounded img-fluid avatar-40"
-                                                        :src="'/images/user/01.jpg'"
-                                                        alt="profile"
-                                                    />
-                                                </td>
-                                                <td>{{ user.name }}</td>
-                                                <td>(760) 756 7568</td>
-                                                <td>{{ user.email }}</td>
-                                                <td>USA</td>
-                                                <td>
-                                                    <span
-                                                        class="badge iq-bg-primary"
-                                                        >Active</span
-                                                    >
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="badge iq-bg-danger"
-                                                        v-for="(
-                                                            role, no
-                                                        ) in user.roles"
-                                                        :key="no"
-                                                        >{{ role.name }}</span
-                                                    >
-                                                </td>
-                                                <td>2019/12/01</td>
+                                               
+                                                <td>{{ role.name }}</td>
+                                           
+                                        
                                                 <td>
                                                     <div
                                                         class="flex align-items-center list-user-action"
                                                     >
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Add"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-user-add-line"
-                                                            ></i
-                                                        ></a>
-                                                        <a
+                                                        
+                                                        <Link
                                                             class="iq-bg-primary"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title=""
                                                             data-original-title="Edit"
-                                                            href="#"
+                                                            :href="route('admin.role.edit',role.id)"
                                                             ><i
                                                                 class="ri-pencil-line"
                                                             ></i
-                                                        ></a>
+                                                        ></Link>
                                                         <a
                                                             class="iq-bg-primary"
                                                             data-toggle="tooltip"
@@ -238,7 +198,7 @@ export default {
     },
 
     props: {
-        users: Object,
+        roles: Object,
     },
 };
 </script>

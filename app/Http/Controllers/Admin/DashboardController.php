@@ -16,12 +16,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $quotations = QuotationRequirement::with('customer');
-        $pending_quotations = $quotations->where('status', 0)->take(10)->orderBy('id','desc')->get();
-
-        $pending_quotations_count = $quotations->where('status', 0)->count();
-        $quotations = $quotations->get();
-        $quotations_count = $quotations->count();
-        return Inertia::render('Admin/Dashboard', compact('pending_quotations_count', 'pending_quotations', 'quotations_count', 'quotations'));
+       
+        return Inertia::render('Admin/Dashboard');
     }
 }
