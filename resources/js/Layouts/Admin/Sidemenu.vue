@@ -136,6 +136,24 @@ export default {
                     ],
                     /* User section edning */
                 },
+                {
+                    /* Seller section starting */
+                    name: "Seller",
+                    permission: "seller.list",
+                    path_name: "/seller",
+                    icon: "la-user-tie",
+                    id: "#sellerinfo",
+                    id_n: "sellerinfo",
+                    sub: [
+                        {
+                            permission: "seller.list",
+                            name: "LIST",
+                            icon: "la-list",
+                            link: "admin.seller.list",
+                        },
+                    ],
+                    /* User section edning */
+                },
             ],
         };
     },

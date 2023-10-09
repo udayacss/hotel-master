@@ -10,6 +10,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,7 +66,12 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
         Route::post('/update', [RoleController::class, 'create'])->name('admin.role.update');
     });
-   
+
+    Route::prefix('/seller')->group(function () {
+        Route::get('/', [SellerController::class, 'list'])->name('admin.seller.list');
+        Route::get('/create', [SellerController::class, 'create'])->name('admin.seller.create');
+        Route::post('/store', [SellerController::class, 'store'])->name('admin.seller.store');
+    });
 
     Route::prefix('/image')->group(function () {
         Route::post('/upload', [ImageController::class, 'upload'])->name('admin.image.upload');

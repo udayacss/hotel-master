@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('mobile_no');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('mobile_no')->nullable();
+
+            $table->unsignedBigInteger('my_referrel_id');
+            $table->unsignedBigInteger('referrer_id')->comment('coming from users table');
 
             $table->tinyInteger('is_active')->default(0)->comment('0 - inactive 1= active');
             $table->timestamps();
