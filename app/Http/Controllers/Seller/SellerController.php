@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Seller;
+use App\Models\SellerSubcription;
 use App\Models\User;
+use App\Services\BoardService;
 use App\Services\ReferralService;
 use Auth;
+use DB;
 use Hash;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -28,14 +32,17 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'referral' => 'required',
+            'referral' => 'required|exists:referrals,ref_no',
             'first_name' => 'required',
             'last_name' => 'required',
+            'level_id' => 'required',
             'email' => 'required',
             'mobile_no' => 'required',
         ];
 
         $request->validate($rules);
+
+        DB::beginTransaction();
 
         $user = User::create([
             'name' => $request->first_name,
@@ -54,6 +61,18 @@ class SellerController extends Controller
         $seller->my_referrel_id =  $referral->id;
         $seller->referrer_id = (new ReferralService())->getReferral($request->referral);
         $seller->save();
+
+        $subscription = SellerSubcription::create([
+            'code' => '123',
+            'seller_id' =>  $seller->id,
+            'level_id' => $request->level_id,
+            'ref_no' => $request->referral,
+            'status' => Status::SUBSCRIPTION_INACTIVE
+        ]);
+
+        DB::commit();
+
+        // (new BoardService())->createNewBoard(2);
 
         return response()->json(['success' => true]);
     }

@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seller_subcriptions', function (Blueprint $table) {
+        Schema::create('board_slots', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->unsignedBigInteger('seller_id');
-            $table->unsignedBigInteger('level_id');
-
-            $table->string('ref_no');
-            $table->tinyInteger('status')->default(0)->comment(' 0 - pending 1 - checked');
-            $table->tinyInteger('achieved')->default(0)->comment(' 0 - pending 1 - completed');
-
+          
+            $table->unsignedBigInteger('board_id');
+            $table->unsignedBigInteger('seller_id')->nullable()->comment('seller_id of referral');
+     
             $table->softDeletes();
             $table->timestamps();
         });
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seller_subcriptions');
+        Schema::dropIfExists('board_slots');
     }
 };

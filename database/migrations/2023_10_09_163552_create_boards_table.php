@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('level_id');
             $table->string('code');
             $table->string('name');
             $table->unsignedBigInteger('owner_seller_id');
@@ -28,11 +29,12 @@ return new class extends Migration
             $table->unsignedBigInteger('slot_eight')->nullable();
             $table->unsignedBigInteger('slot_nine')->nullable();
 
-            
+            $table->string('next_slot')->default('slot_two');
             
             $table->softDeletes();
             $table->timestamps();
         });
+
     }
 
     /**
