@@ -29,6 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('slot_eight')->nullable();
             $table->unsignedBigInteger('slot_nine')->nullable();
 
+            $table->tinyInteger('status')->default(1)->nullable()->comment('1 = active 2 = completed');
+
             $table->string('next_slot')->default('slot_two');
             
             $table->softDeletes();

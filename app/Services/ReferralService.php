@@ -13,7 +13,7 @@ class ReferralService
 {
     public function getReferral($ref)
     {
-        return Referral::where('ref_no', $ref)->first()->id;
+        return Referral::where('ref_no', $ref)->first();
     }
 
     public function createReferral($user_id)

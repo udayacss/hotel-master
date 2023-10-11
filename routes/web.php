@@ -10,6 +10,8 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +73,18 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('/', [SellerController::class, 'list'])->name('admin.seller.list');
         Route::get('/create', [SellerController::class, 'create'])->name('admin.seller.create');
         Route::post('/store', [SellerController::class, 'store'])->name('admin.seller.store');
+        Route::post('/approve', [SellerController::class, 'approve'])->name('admin.seller.approve');
+    });
+
+    Route::prefix('/subscription')->group(function () {
+        Route::get('/', [SubscriptionController::class, 'list'])->name('admin.subscription.list');
+        Route::post('/approve', [SubscriptionController::class, 'approve'])->name('admin.subscription.approve');
+    });
+
+    Route::prefix('/board')->group(function () {
+        Route::get('/', [BoardController::class, 'list'])->name('admin.board.list');
+        Route::get('/create', [BoardController::class, 'create'])->name('admin.board.create');
+        Route::post('/store', [BoardController::class, 'store'])->name('admin.board.store');
     });
 
     Route::prefix('/image')->group(function () {

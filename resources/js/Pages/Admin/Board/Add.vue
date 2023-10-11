@@ -370,7 +370,6 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout.vue";
 import { Link, useForm } from "@inertiajs/vue3";
-import Swal from "sweetalert2";
 
 export default {
     components: {

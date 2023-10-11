@@ -9,7 +9,7 @@
                                 class="iq-card-header d-flex justify-content-between"
                             >
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Seller List</h4>
+                                    <h4 class="card-title">Board List</h4>
                                 </div>
                             </div>
                             <div class="iq-card-body">
@@ -47,30 +47,13 @@
                                                     class="iq-bg-danger btn"
                                                     :href="
                                                         route(
-                                                            'admin.seller.create'
+                                                            'admin.board.create'
                                                         )
                                                     "
                                                 >
                                                     ADD NEW
                                                 </Link>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Print
-                                                </a>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Excel
-                                                </a>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Pdf
-                                                </a>
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -82,89 +65,78 @@
                                     >
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Referral</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
-                                                <th>Join Date</th>
-                                                <th>Action</th>
+                                                <th>BOARD</th>
+                                                <th>SLOT 1</th>
+                                                <th>SLOT 2</th>
+                                                <th>SLOT 3</th>
+                                                <th>SLOT 4</th>
+                                                <th>SLOT 5</th>
+                                                <th>SLOT 6</th>
+                                                <th>SLOT 7</th>
+                                                <th>SLOT 8</th>
+                                                <th>SLOT 9</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr
-                                                v-for="(user, index) in sellers"
+                                                v-for="(item, index) in boards"
                                                 :key="index"
                                             >
-                                                <td>
-                                                    {{
-                                                        user.first_name +
-                                                        " " +
-                                                        user.last_name
-                                                    }}
-                                                </td>
-                                                <td>{{ user.mobile_no }}</td>
-                                                <td>
-                                                    {{ user.referral?.ref_no }}
-                                                </td>
-                                                <td>{{ user.user.email }}</td>
-                                                <td>
-                                                    <span
-                                                        class="badge iq-bg-primary"
-                                                        >Active</span
-                                                    >
-                                                </td>
+                                                <td>{{ item.name }}</td>
 
                                                 <td>
-                                                    {{
-                                                        formatDate(
-                                                            user.created_at
-                                                        )
-                                                    }}
+                                                    <span v-if="item.slot_one"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
                                                 </td>
                                                 <td>
-                                                    <div
-                                                        class="flex align-items-center list-user-action"
+                                                    <span v-if="item.slot_two"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
                                                     >
-                                                        <!-- <button
-                                                            class="btn iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Add"
-                                                            @click="
-                                                                aproveSeller(
-                                                                    user.id
-                                                                )
-                                                            "
-                                                        >
-                                                            <i
-                                                                class="ri-user-add-line"
-                                                            ></i>
-                                                        </button> -->
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Edit"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-pencil-line"
-                                                            ></i
-                                                        ></a>
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Delete"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-delete-bin-line"
-                                                            ></i
-                                                        ></a>
-                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_three"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_four"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_five"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_six"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_seven"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_eight"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span v-if="item.slot_nine"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -237,84 +209,15 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/vue3";
-import moment from "moment";
-import Swal from "sweetalert2";
 
 export default {
     components: {
         AppLayout,
         Link,
-        moment,
     },
 
     props: {
-        sellers: Object,
-    },
-    data() {
-        return {
-            errors: [],
-        };
-    },
-    methods: {
-        formatDate(date) {
-            return moment(date).format("YYYY/MM/DD");
-        },
-        aproveSeller(seller_id) {
-            this.showConfirmAlert(seller_id);
-        },
-        async approve(seller_id) {
-            this.button_status = false; // setting button disable while submitting
-            try {
-                const response = await axios.post(
-                    route("admin.seller.approve"),
-                    {
-                        seller_id: seller_id,
-                    }
-                );
-                if (response.data.success) {
-                    this.showAlert("Approved");
-                    this.errors = [];
-                    if (!this.role) {
-                        this.form.reset();
-                    }
-                }
-            } catch (error) {
-                if (error.response.status === 422) {
-                    // Validation error occurred
-                    this.errors = error.response.data.errors;
-                    this.showAlert(this.errors.seller_id, 2500, "error");
-                    this.button_status;
-                } else {
-                    // Handle other types of errors
-                    console.error(error);
-                    this.button_status;
-                }
-            }
-        },
-        showAlert(type, time = 1500, icon = "success") {
-            Swal.fire({
-                position: "top-end",
-                icon: icon,
-                title: type,
-                showConfirmButton: false,
-                timer: time,
-            });
-        },
-        showConfirmAlert(seller_id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Approve !",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.approve(seller_id);
-                }
-            });
-        },
+        boards: Object,
     },
 };
 </script>
