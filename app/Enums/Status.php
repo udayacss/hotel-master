@@ -12,6 +12,7 @@ enum Status: int
    const SUBSCRIPTION_ACTIVE = 1;
    const SUBSCRIPTION_INACTIVE = 0;
    const SUBSCRIPTION_ACHIEVED = 1;
+   const SUBSCRIPTION_CHECKED = 1;
 
    const BOARD_ACTIVE = 1;
    const BOARD_COMPLETED = 2;

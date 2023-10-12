@@ -9,7 +9,9 @@
                                 class="iq-card-header d-flex justify-content-between"
                             >
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Subscription List</h4>
+                                    <h4 class="card-title">
+                                        Subscription List
+                                    </h4>
                                 </div>
                             </div>
                             <div class="iq-card-body">
@@ -40,10 +42,7 @@
                                         <div class="col-sm-12 col-md-6">
                                             <div
                                                 class="user-list-files d-flex float-right"
-                                            >
-                                              
-                                               
-                                            </div>
+                                            ></div>
                                         </div>
                                     </div>
                                     <table
@@ -62,7 +61,7 @@
                                         </thead>
                                         <tbody>
                                             <tr
-                                                v-for="(item, index) in subs"
+                                                v-for="(item, index) in v_subs"
                                                 :key="index"
                                             >
                                                 <td>
@@ -73,8 +72,6 @@
                                                     }}
                                                 </td>
                                                 <td>{{ item.level_id }}</td>
-                                               
-                                               
 
                                                 <td>
                                                     {{
@@ -103,7 +100,6 @@
                                                                 class="ri-user-add-line"
                                                             ></i>
                                                         </button>
-                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -193,6 +189,7 @@ export default {
     data() {
         return {
             errors: [],
+            v_subs: this.subs,
         };
     },
     methods: {
@@ -213,10 +210,8 @@ export default {
                 );
                 if (response.data.success) {
                     this.showAlert("Approved");
+                    this.v_subs = response.data.data;
                     this.errors = [];
-                    if (!this.role) {
-                        this.form.reset();
-                    }
                 }
             } catch (error) {
                 if (error.response.status === 422) {

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
           
             $table->unsignedBigInteger('board_id');
-            $table->unsignedBigInteger('seller_id')->nullable()->comment('seller_id of referral');
+            $table->unsignedBigInteger('seller_id')->nullable()->comment('seller_idl');
+            $table->unsignedBigInteger('ref_seller_id')->nullable()->comment('seller_id of referral');
      
             $table->softDeletes();
             $table->timestamps();

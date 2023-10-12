@@ -10,7 +10,22 @@ class BoardController extends Controller
 {
     public function list()
     {
-        $boards = Board::get();
+        $boards = Board::with([
+            'one',
+            'two',
+            'three',
+            'four',
+            'five',
+            'six',
+            'seven',
+            'eight',
+            'nine',
+            'ten',
+            'eleven',
+            'twelve',
+            'thirteen',
+        ])
+            ->get();
         return Inertia::render('Admin/Board/List', compact('boards'));
     }
 }

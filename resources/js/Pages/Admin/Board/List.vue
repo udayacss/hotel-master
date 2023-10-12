@@ -53,7 +53,6 @@
                                                 >
                                                     ADD NEW
                                                 </Link>
-                                             
                                             </div>
                                         </div>
                                     </div>
@@ -75,6 +74,10 @@
                                                 <th>SLOT 7</th>
                                                 <th>SLOT 8</th>
                                                 <th>SLOT 9</th>
+                                                <th>SLOT 10</th>
+                                                <th>SLOT 11</th>
+                                                <th>SLOT 12</th>
+                                                <th>SLOT 13</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,55 +88,101 @@
                                                 <td>{{ item.name }}</td>
 
                                                 <td>
-                                                    <span v-if="item.slot_one"
+                                                    <span
+                                                        v-if="item.slot_one"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                    <span
+                                                        v-if="item.slot_one"
+                                                        class="badge iq-bg-primary ml-1"
+                                                        >{{
+                                                            item.one
+                                                        }}</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        v-if="item.slot_two"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_two"
+                                                    <span
+                                                        v-if="item.slot_three"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_three"
+                                                    <span
+                                                        v-if="item.slot_four"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_four"
+                                                    <span
+                                                        v-if="item.slot_five"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_five"
+                                                    <span
+                                                        v-if="item.slot_six"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_six"
+                                                    <span
+                                                        v-if="item.slot_seven"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_seven"
+                                                    <span
+                                                        v-if="item.slot_eight"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_eight"
+                                                    <span
+                                                        v-if="item.slot_nine"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
                                                 </td>
                                                 <td>
-                                                    <span v-if="item.slot_nine"
+                                                    <span
+                                                        v-if="item.slot_ten"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        v-if="item.slot_eleven"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        v-if="item.slot_twelve"
+                                                        class="badge iq-bg-danger"
+                                                        >FILLED</span
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        v-if="
+                                                            item.slot_thirteen
+                                                        "
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
                                                     >
@@ -219,6 +268,9 @@ export default {
     props: {
         boards: Object,
     },
+    mounted(){
+        console.log(this.boards);
+    }
 };
 </script>
 
