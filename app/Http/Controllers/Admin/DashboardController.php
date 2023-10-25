@@ -19,4 +19,9 @@ class DashboardController extends Controller
        
         return Inertia::render('Admin/Dashboard');
     }
+    public function guest()
+    {
+       
+        return Inertia::render('Seller/Subscription/Guest');
+    }
 }

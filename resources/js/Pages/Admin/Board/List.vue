@@ -88,16 +88,16 @@
                                                 <td>{{ item.name }}</td>
 
                                                 <td>
-                                                    <span
+                                                    <!-- <span
                                                         v-if="item.slot_one"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
-                                                    >
+                                                    > -->
                                                     <span
                                                         v-if="item.slot_one"
                                                         class="badge iq-bg-primary ml-1"
                                                         >{{
-                                                            item.one
+                                                            item.one.first_name
                                                         }}</span
                                                     >
                                                 </td>
@@ -105,77 +105,99 @@
                                                     <span
                                                         v-if="item.slot_two"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.two.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_three"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.three.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_four"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.four.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_five"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.five.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_six"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.six.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_seven"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.seven.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_eight"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.eight.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_nine"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.nine.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_ten"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.ten.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_eleven"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.eleven.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_twelve"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.twelve.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                                 <td>
@@ -184,7 +206,9 @@
                                                             item.slot_thirteen
                                                         "
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.thirteen.first_name
+                                                        }}</span
                                                     >
                                                 </td>
                                             </tr>

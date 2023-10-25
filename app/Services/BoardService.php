@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Board;
+use App\Models\BoardSlot;
 use App\Models\Referral;
+use App\Models\Seller;
 use Illuminate\Support\Facades\DB;
 
 class BoardService
@@ -13,14 +15,24 @@ class BoardService
         return Referral::where('ref_no', $ref)->first()->id;
     }
 
-    public function createNewBoard($owner_id)
+    public function createNewBoard($owner_id, $from = 0)
     {
-        return Board::create([
+        $board =  Board::create([
             'code' => $this->generateBoardCode($owner_id),
             'name' => $this->generateBoardCode($owner_id),
             'owner_seller_id' => $owner_id,
-            'slot_one' => $owner_id
+            'slot_one' => $owner_id,
+            'from_board_id' => $from
         ]);
+
+
+        BoardSlot::create([
+            'seller_id' => $owner_id,
+            'board_id' => $board->id,
+            'ref_seller_id' => 0,
+        ]);
+
+        return $board;
     }
 
     public function generateBoardCode($owner_id)
@@ -37,7 +49,7 @@ class BoardService
         return DB::table($table)->where($column, $number)->exists();
     }
 
-    public function findReferrerBoard($rferral_id){
-        
+    public function findReferrerBoard($rferral_id)
+    {
     }
 }

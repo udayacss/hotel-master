@@ -14,7 +14,7 @@ class Board extends Model
         'id',
         'code',
         'name',
-        'owner_seller_id',
+        'owner_id',
         'slot_one',
         'slot_two',
         'slot_three',
@@ -32,54 +32,54 @@ class Board extends Model
 
     public function one()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_one')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_one');
     }
     public function two()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_two')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_two');
     }
     public function three()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_three')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_three');
     }
     public function four()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_four')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_four');
     }
     public function five()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_five')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_five');
     }
     public function six()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_six')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_six');
     }
     public function seven()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_seven')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_seven');
     }
     public function eight()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_eight')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_eight');
     }
     public function nine()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_nine')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_nine');
     }
     public function ten()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_ten')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_ten');
     }
     public function eleven()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_eleven')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_eleven');
     }
     public function twelve()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_twelve')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_twelve');
     }
     public function thirteen()
     {
-        return $this->hasOne(BoardSlot::class, 'seller_id', 'slot_thirteen')->where('board_id', $this->id);
+        return $this->hasOne(Seller::class, 'id', 'slot_thirteen');
     }
 }

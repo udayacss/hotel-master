@@ -46,9 +46,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+Route::get('/', [DashboardController::class, 'guest'])->name('admin.dashboard.index');
+Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('guest.seller.store');
+
 Route::middleware(['auth:web'])->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('/user')->group(function () {

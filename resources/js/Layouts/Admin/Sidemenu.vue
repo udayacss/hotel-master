@@ -9,7 +9,7 @@
                         class="img-fluid rounded"
                         alt=""
                     />
-                    <span>HM</span>
+                    <span>TravelTube</span>
                 </a>
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu">
