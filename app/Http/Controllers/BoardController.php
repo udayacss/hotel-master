@@ -10,20 +10,20 @@ class BoardController extends Controller
 {
     public function list()
     {
-        $boards = Board::with([
-            'one',
-            'two',
-            'three',
-            'four',
-            'five',
-            'six',
-            'seven',
-            'eight',
-            'nine',
-            'ten',
-            'eleven',
-            'twelve',
-            'thirteen',
+         $boards = Board::with([
+            'one.referral',
+            'two.referral',
+            'three.referral',
+            'four.referral',
+            'five.referral',
+            'six.referral',
+            'seven.referral',
+            'eight.referral',
+            'nine.referral',
+            'ten.referral',
+            'eleven.referral',
+            'twelve.referral',
+            'thirteen.referral',
         ])
             ->get();
         return Inertia::render('Admin/Board/List', compact('boards'));

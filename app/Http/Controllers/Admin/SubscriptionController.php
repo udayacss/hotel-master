@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
 
             $available_board = BoardSlot::join('boards', 'boards.id', 'board_slots.board_id')
                 ->where('board_slots.seller_id', $ref_seller->id)
-                ->where('boards.level_id', $subscription->level_id)
+                // ->where('boards.level_id', $subscription->level_id)
                 ->where('boards.status', Status::BOARD_ACTIVE)
                 ->first();
 

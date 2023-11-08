@@ -7,6 +7,7 @@ use App\Models\BoardSlot;
 use App\Models\Referral;
 use App\Models\Seller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BoardService
 {
@@ -16,7 +17,8 @@ class BoardService
     }
 
     public function createNewBoard($owner_id, $from = 0)
-    {
+    { 
+        // Log::info('ERR :'.$owner_id);
         $board =  Board::create([
             'code' => $this->generateBoardCode($owner_id),
             'name' => $this->generateBoardCode($owner_id),

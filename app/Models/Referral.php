@@ -11,4 +11,9 @@ class Referral extends Model
     use HasFactory, SoftDeletes;
 
     protected  $fillable = ['user_id', 'ref_no', 'status'];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

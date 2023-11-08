@@ -14,7 +14,7 @@ class Board extends Model
         'id',
         'code',
         'name',
-        'owner_id',
+        'owner_seller_id',
         'slot_one',
         'slot_two',
         'slot_three',
