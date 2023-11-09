@@ -28,12 +28,28 @@ class PermissionSeeder extends Seeder
                 ['name' => 'user.block', 'section' => 'user'],
             ],
             'role' => [
-                ['name' => 'role.create', 'section' => 'role'],
                 ['name' => 'role.list', 'section' => 'role'],
-                ['name' => 'role.update', 'section' => 'role'],
+                ['name' => 'role.edit', 'section' => 'role'],
+                ['name' => 'role.create', 'section' => 'role'],
                 ['name' => 'role.delete', 'section' => 'role'],
-                ['name' => 'role.block', 'section' => 'role'],
+                ['name' => 'role.store', 'section' => 'role'],
+                ['name' => 'role.update', 'section' => 'role'],
             ],
+            'seller' => [
+                ['name' => 'seller.create', 'section' => 'seller'],
+                ['name' => 'seller.list', 'section' => 'seller'],
+                ['name' => 'seller.store', 'section' => 'seller'],
+                ['name' => 'seller.approve', 'section' => 'seller'],
+            ],
+            'board' => [
+                ['name' => 'board.list', 'section' => 'board'],
+                ['name' => 'board.create', 'section' => 'board'],
+                ['name' => 'board.store', 'section' => 'board'],
+                ],
+            'subscription' => [
+                ['name' => 'subscription.list', 'section' => 'subscription'],
+                ['name' => 'subscription.approve', 'section' => 'subscription'],
+                ],
         ];
 
         $data = [];
@@ -54,14 +70,14 @@ class PermissionSeeder extends Seeder
         Permission::insert($data);
 
         $allPermissions = Permission::all();
-        $role = Role::where('name', 'SuperUser')->first();
+        $role = Role::where('name', 'SUPER ADMIN')->first();
         if (!$role) {
-            $role = Role::create(['name' => 'SuperUser']);
+            $role = Role::create(['name' => 'SUPER ADMIN']);
         }
         $role->syncPermissions($allPermissions);
 
 
-        $admin_user['name'] = 'Super Admin';
+        $admin_user['name'] = 'SUPER ADMIN';
         $admin_user['email'] = 'suadmin@gmail.com';
         $admin_user['password'] = Hash::make('Abcd@1234');
 
@@ -70,6 +86,6 @@ class PermissionSeeder extends Seeder
             $user = User::create($admin_user);
         }
 
-        $user->assignRole('SuperUser');
+        $user->assignRole('SUPER ADMIN');
     }
 }

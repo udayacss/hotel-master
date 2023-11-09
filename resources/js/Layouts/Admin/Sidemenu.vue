@@ -26,7 +26,14 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <div v-for="(item, index) in routes" :key="index">
-                            <li :class="{ active: checkPath(item.path_name) }">
+                            <li
+                                :class="{ active: checkPath(item.path_name) }"
+                                v-if="
+                                    $page.props.access_permissions.includes(
+                                        item.permission
+                                    )
+                                "
+                            >
                                 <a
                                     :href="item.id"
                                     class="iq-waves-effect"
@@ -56,13 +63,20 @@
                                         :key="sub_index"
                                     >
                                         <li
+                                            v-if="
+                                                $page.props.access_permissions.includes(
+                                                    sub_item.permission
+                                                )
+                                            "
                                             :class="{
                                                 active: getIcon(
                                                     route(sub_item.link)
                                                 ),
                                             }"
                                         >
-                                            <Link :href="route(sub_item.link)"
+                                            <Link
+                                                :href="route(sub_item.link)"
+                                                method="get"
                                                 ><i
                                                     class="las"
                                                     :class="sub_item.icon"
@@ -88,16 +102,14 @@ export default {
     components: {
         Link,
     },
-    created() {
-        //  console.log($page.props);
-    },
+    created() {},
     data() {
         return {
             routes: [
                 {
                     /* Roles & Permissions section starting */
                     name: "Roles & Permissions",
-                    permission: "roles.list",
+                    permission: "role.list",
                     path_name: "/role",
                     icon: "la-user-tie",
                     id: "#roleinfo",
@@ -115,7 +127,7 @@ export default {
                 {
                     /* User section starting */
                     name: "User",
-                    permission: "user.list",
+                    permission: "user.update",
                     path_name: "/user",
                     icon: "la-user-tie",
                     id: "#userinfo",

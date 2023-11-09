@@ -19,6 +19,14 @@
                                                 Seller Create
                                             </a>
                                         </li>
+                                        <li class="col-md-3 p-0">
+                                            <a
+                                                class="nav-link active"
+                                                href="/login"
+                                            >
+                                                Login
+                                            </a>
+                                        </li>
 
                                         <!-- <li class="col-md-3 p-0">
                                             <a

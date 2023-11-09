@@ -41,9 +41,15 @@
                                             <div
                                                 class="user-list-files d-flex float-right"
                                             >
-                                                <Link as="button" method="get"
+                                                <Link
+                                                    as="button"
+                                                    method="get"
                                                     class="iq-bg-danger btn"
-                                                    :href="route('admin.role.create')"
+                                                    :href="
+                                                        route(
+                                                            'admin.role.create'
+                                                        )
+                                                    "
                                                 >
                                                     ADD NEW
                                                 </Link>
@@ -77,7 +83,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                               
+
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -86,37 +92,46 @@
                                                 v-for="(role, index) in roles"
                                                 :key="index"
                                             >
-                                               
                                                 <td>{{ role.name }}</td>
-                                           
-                                        
+
                                                 <td>
                                                     <div
                                                         class="flex align-items-center list-user-action"
                                                     >
-                                                        
                                                         <Link
                                                             class="iq-bg-primary"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title=""
+                                                            method="get"
                                                             data-original-title="Edit"
-                                                            :href="route('admin.role.edit',role.id)"
+                                                            :href="
+                                                                route(
+                                                                    'admin.role.edit',
+                                                                    role.id
+                                                                )
+                                                            "
                                                             ><i
                                                                 class="ri-pencil-line"
                                                             ></i
                                                         ></Link>
-                                                        <a
+                                                        <Link
                                                             class="iq-bg-primary"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title=""
+                                                            method="delete"
                                                             data-original-title="Delete"
-                                                            href="#"
+                                                            :href="
+                                                                route(
+                                                                    'admin.role.delete',
+                                                                    role.id
+                                                                )
+                                                            "
                                                             ><i
                                                                 class="ri-delete-bin-line"
                                                             ></i
-                                                        ></a>
+                                                        ></Link>
                                                     </div>
                                                 </td>
                                             </tr>

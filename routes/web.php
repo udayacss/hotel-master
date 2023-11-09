@@ -51,42 +51,42 @@ Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('gues
 
 Route::middleware(['auth:web'])->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->can('admin.dashboard');
 
     Route::prefix('/user')->group(function () {
-        Route::get('/', [UserController::class, 'list'])->name('admin.user.list');
-        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile');
-        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword');
-        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal');
-        Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit');
-        Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::get('/', [UserController::class, 'list'])->name('admin.user.list')->can('user.list');
+        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile')->can('user.profile');
+        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword')->can('user.changePassword');
+        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal')->can('admin.user.changePersonal');
+        Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit')->can('user.edit');
+        Route::get('/create', [UserController::class, 'create'])->name('admin.user.create')->can('user.create');
     });
 
     Route::prefix('/role')->group(function () {
-        Route::get('/', [RoleController::class, 'list'])->name('admin.role.list');
-        Route::get('/profile', [RoleController::class, 'profile'])->name('admin.role.profile');
-        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
-        Route::get('/create', [RoleController::class, 'create'])->name('admin.role.create');
-        Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
-        Route::post('/update', [RoleController::class, 'create'])->name('admin.role.update');
+        Route::get('/', [RoleController::class, 'list'])->name('admin.role.list')->can('role.list');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('admin.role.edit')->can('role.edit');
+        Route::get('/create', [RoleController::class, 'create'])->name('admin.role.create')->can('role.create');
+        Route::delete('/{role_id}', [RoleController::class, 'delete'])->name('admin.role.delete')->can('role.delete');
+        Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store')->can('role.store');
+        Route::post('/update', [RoleController::class, 'create'])->name('admin.role.update')->can('role.update');
     });
 
     Route::prefix('/seller')->group(function () {
-        Route::get('/', [SellerController::class, 'list'])->name('admin.seller.list');
-        Route::get('/create', [SellerController::class, 'create'])->name('admin.seller.create');
-        Route::post('/store', [SellerController::class, 'store'])->name('admin.seller.store');
-        Route::post('/approve', [SellerController::class, 'approve'])->name('admin.seller.approve');
+        Route::get('/', [SellerController::class, 'list'])->name('admin.seller.list')->can('seller.list');
+        Route::get('/create', [SellerController::class, 'create'])->name('admin.seller.create')->can('seller.create');
+        Route::post('/store', [SellerController::class, 'store'])->name('admin.seller.store')->can('seller.store');
+        Route::post('/approve', [SellerController::class, 'approve'])->name('admin.seller.approve')->can('seller.approve');
     });
 
     Route::prefix('/subscription')->group(function () {
-        Route::get('/', [SubscriptionController::class, 'list'])->name('admin.subscription.list');
-        Route::post('/approve', [SubscriptionController::class, 'approve'])->name('admin.subscription.approve');
+        Route::get('/', [SubscriptionController::class, 'list'])->name('admin.subscription.list')->can('subscription.list');
+        Route::post('/approve', [SubscriptionController::class, 'approve'])->name('admin.subscription.approve')->can('subscription.approve');
     });
 
     Route::prefix('/board')->group(function () {
-        Route::get('/', [BoardController::class, 'list'])->name('admin.board.list');
-        Route::get('/create', [BoardController::class, 'create'])->name('admin.board.create');
-        Route::post('/store', [BoardController::class, 'store'])->name('admin.board.store');
+        Route::get('/', [BoardController::class, 'list'])->name('admin.board.list')->can('board.list');
+        Route::get('/create', [BoardController::class, 'create'])->name('admin.board.create')->can('board.create');
+        Route::post('/store', [BoardController::class, 'store'])->name('admin.board.store')->can('board.store');
     });
 
     Route::prefix('/image')->group(function () {
