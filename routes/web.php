@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal')->can('admin.user.changePersonal');
         Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit')->can('user.edit');
         Route::get('/create', [UserController::class, 'create'])->name('admin.user.create')->can('user.create');
+        Route::get('/my', [DashboardController::class, 'my'])->name('admin.user.my')->can('user.my');
     });
 
     Route::prefix('/role')->group(function () {
@@ -85,6 +87,7 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::prefix('/board')->group(function () {
         Route::get('/', [BoardController::class, 'list'])->name('admin.board.list')->can('board.list');
+        Route::get('/preview', [BoardController::class, 'listPreview'])->name('admin.board.preview')->can('board.list');
         Route::get('/create', [BoardController::class, 'create'])->name('admin.board.create')->can('board.create');
         Route::post('/store', [BoardController::class, 'store'])->name('admin.board.store')->can('board.store');
     });

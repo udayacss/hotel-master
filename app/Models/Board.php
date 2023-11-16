@@ -30,6 +30,11 @@ class Board extends Model
         'slot_thirteen',
     ];
 
+    public function owner()
+    {
+        return $this->hasOne(Seller::class, 'id', 'owner_seller_id');
+    }
+
     public function one()
     {
         return $this->hasOne(Seller::class, 'id', 'slot_one');

@@ -31,6 +31,7 @@ class SubscriptionController extends Controller
                 'seller_subcriptions.level_id',
                 'seller_subcriptions.created_at',
                 'seller_subcriptions.bank_ref',
+                'seller_subcriptions.seller_id',
                 'seller_subcriptions.id as sub_id'
             )
             ->get();
@@ -158,7 +159,7 @@ class SubscriptionController extends Controller
                 if ($round < 3) {
                     if ($key != $board->owner_seller_id) {
 
-                        (new BoardService())->createNewBoard($key, $board->id);
+                        (new BoardService())->createNewBoard(owner_id: $key, from: $board->id);
                         array_push($board_owners, $key);
                         $round++;
                     }

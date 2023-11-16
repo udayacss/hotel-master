@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Variables;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,13 +20,21 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        /*
+        **ADD PERMISSIONS TO SUPEr ADMIN ROLE
+        */
         $permissions = [
+            'admin' => [
+                ['name' => 'admin.dashboard', 'section' => 'admin'],
+
+            ],
             'user' => [
                 ['name' => 'user.create', 'section' => 'user'],
                 ['name' => 'user.list', 'section' => 'user'],
                 ['name' => 'user.update', 'section' => 'user'],
                 ['name' => 'user.delete', 'section' => 'user'],
                 ['name' => 'user.block', 'section' => 'user'],
+                ['name' => 'user.my', 'section' => 'user'],
             ],
             'role' => [
                 ['name' => 'role.list', 'section' => 'role'],
@@ -45,11 +54,11 @@ class PermissionSeeder extends Seeder
                 ['name' => 'board.list', 'section' => 'board'],
                 ['name' => 'board.create', 'section' => 'board'],
                 ['name' => 'board.store', 'section' => 'board'],
-                ],
+            ],
             'subscription' => [
                 ['name' => 'subscription.list', 'section' => 'subscription'],
                 ['name' => 'subscription.approve', 'section' => 'subscription'],
-                ],
+            ],
         ];
 
         $data = [];
@@ -75,6 +84,20 @@ class PermissionSeeder extends Seeder
             $role = Role::create(['name' => 'SUPER ADMIN']);
         }
         $role->syncPermissions($allPermissions);
+
+        $role = Role::where('name', Variables::GUEST_ROLE_NAME)->first();
+        if (!$role) {
+            $role = Role::create(['name' => Variables::GUEST_ROLE_NAME]);
+        }
+
+        /*
+        **ADD PERMISSIONS TO GUEST ROLE
+        */
+        $role->syncPermissions([
+            'admin.dashboard',
+            'user.update',
+            'user.my'
+        ]);
 
 
         $admin_user['name'] = 'SUPER ADMIN';

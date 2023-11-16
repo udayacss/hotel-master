@@ -22,7 +22,7 @@ class SellerController extends Controller
 {
     public function list()
     {
-        $sellers = Seller::with('referral', 'user')
+        $sellers = Seller::with('referral', 'user','refNo')
             ->where('is_active', Status::SELLER_ACTIVE)
             ->get();
         return Inertia::render('Admin/Seller/List', compact('sellers'));

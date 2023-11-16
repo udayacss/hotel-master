@@ -145,6 +145,12 @@ export default {
                             icon: "la-list",
                             link: "admin.user.list",
                         },
+                        {
+                            permission: "user.my",
+                            name: "MY",
+                            icon: "la-list",
+                            link: "admin.user.my",
+                        },
                     ],
                     /* User section edning */
                 },
@@ -180,6 +186,12 @@ export default {
                             name: "LIST",
                             icon: "la-list",
                             link: "admin.board.list",
+                        },
+                        {
+                            permission: "board.list",
+                            name: "LIST PREVIEW",
+                            icon: "la-list",
+                            link: "admin.board.preview",
                         },
                     ],
                     /* User section edning */
