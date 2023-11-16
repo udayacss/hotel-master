@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,11 @@ use Illuminate\Support\Facades\Route;
 //         return Inertia::render('Dashboard');
 //     })->name('dashboard');
 // });
+
+
+Route::get('/test', function () {
+    return Inertia::render('Test');
+})->name('test');
 
 
 Route::middleware(['auth:web'])->group(function () {
