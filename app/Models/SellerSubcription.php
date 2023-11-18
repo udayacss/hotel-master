@@ -9,7 +9,7 @@ class SellerSubcription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'seller_id', 'level_id', 'ref_no', 'status', 'achieved'];
+    protected $fillable = ['code', 'seller_id', 'level_id', 'ref_no', 'status', 'achieved','bank_ref'];
 
     public function seller()
     {

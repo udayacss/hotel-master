@@ -9,7 +9,7 @@
                         class="img-fluid rounded"
                         alt=""
                     />
-                    <span>HM</span>
+                    <span>TravelTube</span>
                 </a>
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu">
@@ -26,7 +26,14 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <div v-for="(item, index) in routes" :key="index">
-                            <li :class="{ active: checkPath(item.path_name) }">
+                            <li
+                                :class="{ active: checkPath(item.path_name) }"
+                                v-if="
+                                    $page.props.access_permissions.includes(
+                                        item.permission
+                                    )
+                                "
+                            >
                                 <a
                                     :href="item.id"
                                     class="iq-waves-effect"
@@ -56,13 +63,20 @@
                                         :key="sub_index"
                                     >
                                         <li
+                                            v-if="
+                                                $page.props.access_permissions.includes(
+                                                    sub_item.permission
+                                                )
+                                            "
                                             :class="{
                                                 active: getIcon(
                                                     route(sub_item.link)
                                                 ),
                                             }"
                                         >
-                                            <Link :href="route(sub_item.link)"
+                                            <Link
+                                                :href="route(sub_item.link)"
+                                                method="get"
                                                 ><i
                                                     class="las"
                                                     :class="sub_item.icon"
@@ -89,7 +103,7 @@ export default {
         Link,
     },
     created() {
-        //  console.log($page.props);
+        console.log(this.$page.props);
     },
     data() {
         return {
@@ -97,7 +111,7 @@ export default {
                 {
                     /* Roles & Permissions section starting */
                     name: "Roles & Permissions",
-                    permission: "roles.list",
+                    permission: "role.list",
                     path_name: "/role",
                     icon: "la-user-tie",
                     id: "#roleinfo",
@@ -115,7 +129,7 @@ export default {
                 {
                     /* User section starting */
                     name: "User",
-                    permission: "user.list",
+                    permission: "user.update",
                     path_name: "/user",
                     icon: "la-user-tie",
                     id: "#userinfo",
@@ -132,6 +146,12 @@ export default {
                             name: "LIST",
                             icon: "la-list",
                             link: "admin.user.list",
+                        },
+                        {
+                            permission: "user.my",
+                            name: "MY",
+                            icon: "la-list",
+                            link: "admin.user.my",
                         },
                     ],
                     /* User section edning */
@@ -168,6 +188,12 @@ export default {
                             name: "LIST",
                             icon: "la-list",
                             link: "admin.board.list",
+                        },
+                        {
+                            permission: "board.list",
+                            name: "LIST PREVIEW",
+                            icon: "la-list",
+                            link: "admin.board.preview",
                         },
                     ],
                     /* User section edning */

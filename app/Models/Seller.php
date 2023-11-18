@@ -10,7 +10,7 @@ class Seller extends Model
     use HasFactory;
 
 
-    public function referral()
+    public function refNo()
     {
         return $this->hasOne(Referral::class, 'id', 'my_referrel_id')->where('status', 1);
     }
@@ -18,5 +18,10 @@ class Seller extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function referral()
+    {
+        return $this->hasOne(User::class, 'id', 'referrer_id');
     }
 }

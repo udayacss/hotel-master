@@ -105,7 +105,7 @@
                                                 </td>
                                                 <td>{{ user.mobile_no }}</td>
                                                 <td>
-                                                    {{ user.referral?.ref_no }}
+                                                    {{ user.ref_no.ref_no}}
                                                 </td>
                                                 <td>{{ user.user.email }}</td>
                                                 <td>

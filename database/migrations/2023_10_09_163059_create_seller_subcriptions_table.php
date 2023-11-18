@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('level_id');
 
+            $table->string('bank_ref')->nullable();
             $table->string('ref_no');
             $table->tinyInteger('status')->default(0)->comment(' 0 - pending 1 - checked');
             $table->tinyInteger('achieved')->default(0)->comment(' 0 - pending 1 - completed');

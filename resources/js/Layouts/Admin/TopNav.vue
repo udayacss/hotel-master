@@ -22,7 +22,7 @@
                                     class="img-fluid rounded"
                                     alt=""
                                 />
-                                <span>HM (PVT) LTD</span>
+                                <span>TravelTube</span>
                             </a>
                         </div>
                     </div>

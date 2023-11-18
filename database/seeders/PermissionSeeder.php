@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Variables;
 use App\Models\User;
+use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,20 +21,47 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        /*
+        **ADD PERMISSIONS TO SUPEr ADMIN ROLE
+        */
         $permissions = [
+            'admin' => [
+                ['name' => 'admin.dashboard', 'section' => 'admin'],
+
+            ],
             'user' => [
                 ['name' => 'user.create', 'section' => 'user'],
                 ['name' => 'user.list', 'section' => 'user'],
                 ['name' => 'user.update', 'section' => 'user'],
                 ['name' => 'user.delete', 'section' => 'user'],
                 ['name' => 'user.block', 'section' => 'user'],
+                ['name' => 'user.my', 'section' => 'user'],
+                ['name' => 'user.profile', 'section' => 'user'],
+                ['name' => 'user.changePassword', 'section' => 'user'],
+                ['name' => 'user.changePersonal', 'section' => 'user'],
             ],
             'role' => [
-                ['name' => 'role.create', 'section' => 'role'],
                 ['name' => 'role.list', 'section' => 'role'],
-                ['name' => 'role.update', 'section' => 'role'],
+                ['name' => 'role.edit', 'section' => 'role'],
+                ['name' => 'role.create', 'section' => 'role'],
                 ['name' => 'role.delete', 'section' => 'role'],
-                ['name' => 'role.block', 'section' => 'role'],
+                ['name' => 'role.store', 'section' => 'role'],
+                ['name' => 'role.update', 'section' => 'role'],
+            ],
+            'seller' => [
+                ['name' => 'seller.create', 'section' => 'seller'],
+                ['name' => 'seller.list', 'section' => 'seller'],
+                ['name' => 'seller.store', 'section' => 'seller'],
+                ['name' => 'seller.approve', 'section' => 'seller'],
+            ],
+            'board' => [
+                ['name' => 'board.list', 'section' => 'board'],
+                ['name' => 'board.create', 'section' => 'board'],
+                ['name' => 'board.store', 'section' => 'board'],
+            ],
+            'subscription' => [
+                ['name' => 'subscription.list', 'section' => 'subscription'],
+                ['name' => 'subscription.approve', 'section' => 'subscription'],
             ],
         ];
 
@@ -50,18 +79,35 @@ class PermissionSeeder extends Seeder
                 }
             }
         }
-        // Permission::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Permission::truncate();
+        Role::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Permission::insert($data);
 
         $allPermissions = Permission::all();
-        $role = Role::where('name', 'SuperUser')->first();
+        $role = Role::where('name', 'SUPER ADMIN')->first();
         if (!$role) {
-            $role = Role::create(['name' => 'SuperUser']);
+            $role = Role::create(['name' => 'SUPER ADMIN']);
         }
         $role->syncPermissions($allPermissions);
 
+        $role = Role::where('name', Variables::GUEST_ROLE_NAME)->first();
+        if (!$role) {
+            $role = Role::create(['name' => Variables::GUEST_ROLE_NAME]);
+        }
 
-        $admin_user['name'] = 'Super Admin';
+        /*
+        **ADD PERMISSIONS TO GUEST ROLE
+        */
+        // $role->syncPermissions([
+        //     'admin.dashboard',
+        //     'user.update',
+        //     'user.my'
+        // ]);
+
+
+        $admin_user['name'] = 'SUPER ADMIN';
         $admin_user['email'] = 'suadmin@gmail.com';
         $admin_user['password'] = Hash::make('Abcd@1234');
 
@@ -70,6 +116,6 @@ class PermissionSeeder extends Seeder
             $user = User::create($admin_user);
         }
 
-        $user->assignRole('SuperUser');
+        $user->assignRole('SUPER ADMIN');
     }
 }

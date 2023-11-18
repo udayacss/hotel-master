@@ -88,95 +88,312 @@
                                                 <td>{{ item.name }}</td>
 
                                                 <td>
-                                                    <span
+                                                    <!-- <span
                                                         v-if="item.slot_one"
                                                         class="badge iq-bg-danger"
                                                         >FILLED</span
-                                                    >
+                                                    > -->
                                                     <span
                                                         v-if="item.slot_one"
                                                         class="badge iq-bg-primary ml-1"
                                                         >{{
                                                             item.one
+                                                                .first_name +
+                                                            " " +
+                                                            item.one.last_name
                                                         }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_one"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.one?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_two"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.two
+                                                                .first_name +
+                                                            " " +
+                                                            item.two.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_two"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.two?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_three"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.three
+                                                                .first_name +
+                                                            " " +
+                                                            item.three.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_three"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.three?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_four"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.four
+                                                                .first_name +
+                                                            " " +
+                                                            item.four
+                                                                .last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_four"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.four?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_five"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.five
+                                                                .first_name +
+                                                            " " +
+                                                            item.five.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_five"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.five?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_six"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.six
+                                                                .first_name +
+                                                            " " +
+                                                            item.six.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_six"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.six?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_seven"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.seven
+                                                                .first_name +
+                                                            " " +
+                                                            item.seven.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_seven"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.seven?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_eight"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.eight
+                                                                .first_name +
+                                                            " " +
+                                                            item.eight.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_eight"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.eight?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_nine"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.nine
+                                                                .first_name +
+                                                            " " +
+                                                            item.nine.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_nine"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.nine?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_ten"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.ten
+                                                                .first_name +
+                                                            " " +
+                                                            item.ten.last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_ten"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.ten?.referral
+                                                                ?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_eleven"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.eleven
+                                                                .first_name +
+                                                            " " +
+                                                            item.eleven
+                                                                .last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_eleven"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.eleven
+                                                                ?.referral?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         v-if="item.slot_twelve"
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.twelve
+                                                                .first_name +
+                                                            " " +
+                                                            item.twelve
+                                                                .last_name
+                                                        }}</span
                                                     >
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="item.slot_twelve"
+                                                    >
+                                                        by
+                                                        {{
+                                                            item.twelve
+                                                                ?.referral?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span
@@ -184,8 +401,29 @@
                                                             item.slot_thirteen
                                                         "
                                                         class="badge iq-bg-danger"
-                                                        >FILLED</span
+                                                        >{{
+                                                            item.thirteen
+                                                                .first_name +
+                                                            " " +
+                                                            item.thirteen
+                                                                .last_name
+                                                        }}
+                                                    </span>
+                                                    <br />
+                                                    <span class="badge iq-bg-primary ml-1"
+                                                        mt-0
+                                                        mb-0
+                                                        ml-0
+                                                        v-if="
+                                                            item.slot_thirteen
+                                                        "
                                                     >
+                                                        by
+                                                        {{
+                                                            item.thirteen
+                                                                ?.referral?.name
+                                                        }}
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -268,9 +506,9 @@ export default {
     props: {
         boards: Object,
     },
-    mounted(){
+    mounted() {
         console.log(this.boards);
-    }
+    },
 };
 </script>
 

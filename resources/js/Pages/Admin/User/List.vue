@@ -41,9 +41,15 @@
                                             <div
                                                 class="user-list-files d-flex float-right"
                                             >
-                                                <Link as="button" method="get"
+                                                <Link
+                                                    as="button"
+                                                    method="get"
                                                     class="iq-bg-danger btn"
-                                                    :href="route('admin.user.create')"
+                                                    :href="
+                                                        route(
+                                                            'admin.user.create'
+                                                        )
+                                                    "
                                                 >
                                                     ADD NEW
                                                 </Link>
@@ -80,9 +86,8 @@
                                                 <th>Name</th>
                                                 <th>Contact</th>
                                                 <th>Email</th>
-                                                <th>Country</th>
                                                 <th>Status</th>
-                                                <th>Company</th>
+                                                <th>Role</th>
                                                 <th>Join Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -100,9 +105,10 @@
                                                     />
                                                 </td>
                                                 <td>{{ user.name }}</td>
-                                                <td>(760) 756 7568</td>
+                                                <td>
+                                                    {{ user.seller?.mobile_no }}
+                                                </td>
                                                 <td>{{ user.email }}</td>
-                                                <td>USA</td>
                                                 <td>
                                                     <span
                                                         class="badge iq-bg-primary"
@@ -132,7 +138,7 @@
                                                             data-original-title="Add"
                                                             href="#"
                                                             ><i
-                                                                class="ri-user-add-line"
+                                                                class="ri-close-line"
                                                             ></i
                                                         ></a>
                                                         <a
@@ -146,17 +152,7 @@
                                                                 class="ri-pencil-line"
                                                             ></i
                                                         ></a>
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Delete"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-delete-bin-line"
-                                                            ></i
-                                                        ></a>
+                                                        
                                                     </div>
                                                 </td>
                                             </tr>

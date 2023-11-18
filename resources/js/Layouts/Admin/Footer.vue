@@ -16,8 +16,8 @@
           </div>
           <div class="col-lg-6 text-right">
             Copyright 2023
-            <a href="https://the100solutions.com/"
-              >The 100 Solutions </a
+            <a href="#"
+              >Autonomous Factory </a
             >
             All Rights Reserved.
           </div>

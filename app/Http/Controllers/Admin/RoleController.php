@@ -20,6 +20,7 @@ class RoleController extends Controller
 
     public function create()
     {
+        
         $permissions = Permission::all();
         $permissions = $permissions->groupBy(function ($item) {
             return $item->section;
@@ -60,5 +61,14 @@ class RoleController extends Controller
         $user = Auth::user();
         $user_permissions = [];
         return Inertia::render('Admin/Role/Add', compact('permissions', 'role'));
+    }
+
+    public function delete($roleId)
+    {
+        $role = Role::where('id', $roleId)->first();
+        if (!isset($role))  return to_route('admin.role.list');
+        $role->syncPermissions([]);
+        $role->delete();
+        return to_route('admin.role.list');
     }
 }
