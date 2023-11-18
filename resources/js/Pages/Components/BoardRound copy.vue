@@ -2,7 +2,7 @@
     <div class="row mt-5" v-for="board in v_boards" :key="board.id">
         <div class="circle1 col-md-6 col-xs-12">
             <div class="wrapper1">
-                <!-- <span class="text1">{{
+                <span class="text1">{{
                     board.five
                         ? getFullName(
                               board.five?.first_name,
@@ -73,23 +73,12 @@
                               board.thirteen?.last_name
                           )
                         : ""
-                }}</span> -->
-                <span class="text1 badge badge-secondary">5</span>
-                <span class="text2 badge badge-secondary">6</span>
-                <span class="text3 badge badge-secondary">7</span>
-                <span class="text4 badge badge-secondary">8</span>
-                <span class="text5 badge badge-secondary">9</span>
-                <span class="text6 badge badge-secondary">10</span>
-                <span class="text7 badge badge-secondary">11</span>
-                <span class="text8 badge badge-secondary">12</span>
-                <span class="text9 badge badge-secondary">13</span>
+                }}</span>
                 <div
                     class="sector1"
                     :class="getSaleCount(board?.id, board?.five?.id)"
                     style="transform: rotate(90deg) skew(50deg)"
-                    data-toggle="modal" data-target="#modal11"
-                >
-                </div>
+                ></div>
                 <div
                     class="sector1"
                     :class="getSaleCount(board?.id, board?.six?.id)"
@@ -133,7 +122,7 @@
             </div>
             <div class="circle2">
                 <div class="wrapper2">
-                    <!-- <span class="text1">{{
+                    <span class="text1">{{
                         board.two
                             ? getFullName(
                                   board.two?.first_name,
@@ -156,10 +145,7 @@
                                   board.four?.last_name
                               )
                             : ""
-                    }}</span> -->
-                    <span class="text2 badge badge-secondary">2</span>
-                    <span class="text3 badge badge-secondary">3</span>
-                    <span class="text1 badge badge-secondary">4</span>
+                    }}</span>
                     <div
                         class="sector2"
                         :class="getSaleCount(board?.id, board?.three?.id)"
@@ -182,135 +168,62 @@
                     class="wrapper3"
                     :class="getSaleCount(board?.id, board?.one?.id)"
                 >
-                    <!-- <span class="text1">{{
+                    <span class="text1">{{
                         getFullName(
                             board.owner?.first_name,
                             board.owner?.last_name
                         )
-                    }}</span> -->
-                    <span class="text1 badge badge-secondary">1</span>
+                    }}</span>
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div> -->
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <ol class="list-group list-group-numbered col-md-6 col-xs-12">
+            <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+            >
+                <div class="ms-2 me-auto">
+                    Name
+                    <div class="font-weight-bold">
                         {{
-                        board.five
-                            ? getFullName(
-                                board.five?.first_name,
-                                board.five?.last_name,
-                                board.five?.ref_seller_id
-                            )
-                            : ""
+                            board.owner?.first_name +
+                            " " +
+                            board.owner?.last_name
                         }}
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div> -->
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xs-12">
-            <ol class="list-group list-group-numbered">
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-start"
-                >
-                    <div class="ms-2 me-auto">
-                        My Package Referral
-                        <div class="font-weight-bold">
-                            {{
-                                board.owner?.first_name +
-                                " " +
-                                board.owner?.last_name
-                            }}
-                        </div>
+            </li>
+            <!-- <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+            >
+                <div class="ms-2 me-auto">
+                    Address
+                    <div class="font-weight-bold"></div>
+                </div>
+            </li> -->
+            <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+            >
+                <div class="ms-2 me-auto">
+                    Phone
+                    <div class="font-weight-bold">
+                        {{ board.owner?.mobile_no }}
                     </div>
-                </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-start"
-                >
-                    <div class="ms-2 me-auto">
-                        My Sponser
-                        <div class="font-weight-bold">
-                            {{
-                                board.owner?.first_name +
-                                " " +
-                                board.owner?.last_name
-                            }}
-                        </div>
+                </div>
+            </li>
+            <!-- <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+            >
+                <div class="ms-2 me-auto">
+                    My Referrals
+                    <div class="font-weight-bold">
+                        ...
+                        <a href="#">View more</a>
                     </div>
-                </li>
-                <!-- <li
-                    class="list-group-item d-flex justify-content-between align-items-start"
-                >
-                    <div class="ms-2 me-auto">
-                        Address
-                        <div class="font-weight-bold"></div>
-                    </div>
-                </li> -->
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-start"
-                >
-                    <div class="ms-2 me-auto">
-                        Phone
-                        <div class="font-weight-bold">
-                            {{ board.owner?.mobile_no }}
-                        </div>
-                    </div>
-                </li>
-                <!-- <li
-                    class="list-group-item d-flex justify-content-between align-items-start"
-                >
-                    <div class="ms-2 me-auto">
-                        My Referrals
-                        <div class="font-weight-bold">
-                            ...
-                            <a href="#">View more</a>
-                        </div>
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </li> -->
-            </ol>
-
-            <ol class="list-group list-group-numbered mt-4">
-                <li class="list-group-item d-flex align-items-start">
-                    <span class="text1 badge badge-secondary mr-3">1</span>
-                    <div class="ms-2 w-100">
-                        User 1
-                        <div class="font-weight-bold d-flex">
-                            HM645656
-                            <a href="#" class="ml-auto">View more</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex align-items-start">
-                    <span class="text1 badge badge-secondary mr-3">1</span>
-                    <div class="ms-2 w-100">
-                        User 2
-                        <div class="font-weight-bold d-flex">
-                            HM645657
-                            <a href="#" class="ml-auto">View more</a>
-                        </div>
-                    </div>
-                </li>
-            </ol>
-        </div>
-
+                </div>
+                <span class="badge bg-primary rounded-pill">14</span>
+            </li> -->
+        </ol>
     </div>
 </template>
 
@@ -361,7 +274,7 @@ export default {
 
 <style>
 .circle1 {
-    background: unset;
+    background: #fff;
     /* width: 350px;
         height: 350px; */
     display: flex;
@@ -369,8 +282,8 @@ export default {
     justify-content: center;
 }
 .wrapper1 {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     border: 2px solid #fff;
     border-radius: 50%;
     position: relative;
@@ -388,11 +301,10 @@ export default {
     box-shadow: inset 0px 0px 0px 0.5px #ffffff;
     margin-top: -5000px;
     margin-left: -5000px;
-    cursor: pointer;
 }
 .wrapper2 {
-    width: 225px;
-    height: 225px;
+    width: 200px;
+    height: 200px;
     border: 2px solid #ffffff;
     border-radius: 50%;
     position: relative;
@@ -449,64 +361,64 @@ export default {
 .circle1 .circle2 .text2,
 .circle1 .circle2 .text3,
 .circle1 .circle3 .text1 {
-    color: #fff;
+    color: rgb(13, 13, 202);
     position: absolute;
     font-size: 12px;
     z-index: 99;
 }
 /* Circle1 */
 .circle1 .text1 {
-    top: 9%;
-    left: 61%;
+    top: 10%;
+    left: 60%;
 }
 .circle1 .text2 {
-    top: 25%;
-    left: 82%;
+    top: 28%;
+    left: 80%;
 }
 .circle1 .text3 {
-    top: 51%;
-    left: 88%;
+    top: 53%;
+    left: 85%;
 }
 .circle1 .text4 {
-    top: 76%;
-    left: 76%;
+    top: 77%;
+    left: 73%;
 }
 .circle1 .text5 {
-    top: 88%;
-    left: 49%;
+    top: 90%;
+    left: 46%;
 }
 .circle1 .text6 {
-    top: 77.5%;
-    left: 18.9%;
+    top: 77%;
+    left: 15%;
 }
 .circle1 .text7 {
     top: 50%;
-    left: 6%;
+    left: 3%;
 }
 .circle1 .text8 {
-    top: 25%;
-    left: 12%;
+    top: 28%;
+    left: 8%;
 }
 .circle1 .text9 {
-    top: 9%;
-    left: 32.8%;
+    top: 10%;
+    left: 30%;
 }
 /* Circle2 */
 .circle1 .circle2 .text1 {
-    top: 28%;
-    left: 14%;
+    top: 30%;
+    left: 8%;
 }
 .circle1 .circle2 .text2 {
-    top: 28%;
-    left: 76%;
+    top: 30%;
+    left: 75%;
 }
 .circle1 .circle2 .text3 {
-    top: 81%;
-    left: 45%;
+    top: 82%;
+    left: 40%;
 }
 /* Circle3 */
 .circle1 .circle3 .text1 {
-    top: 40%;
-    left: 41%;
+    top: 45%;
+    left: 35%;
 }
 </style>
