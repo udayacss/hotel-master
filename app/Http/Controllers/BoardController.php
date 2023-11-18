@@ -46,8 +46,11 @@ class BoardController extends Controller
             'eleven.referral',
             'twelve.referral',
             'thirteen.referral',
+            'slots'
         ])
             ->get();
+
+
         return Inertia::render('Admin/Board/ListPreview', compact('boards'));
     }
 }

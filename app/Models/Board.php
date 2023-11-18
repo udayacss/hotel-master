@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Board extends Model
@@ -86,5 +87,10 @@ class Board extends Model
     public function thirteen()
     {
         return $this->hasOne(Seller::class, 'id', 'slot_thirteen');
+    }
+
+    public function slots(): HasMany
+    {
+        return $this->hasMany(BoardSlot::class);
     }
 }

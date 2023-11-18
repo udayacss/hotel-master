@@ -102,7 +102,9 @@ export default {
     components: {
         Link,
     },
-    created() {},
+    created() {
+        console.log(this.$page.props);
+    },
     data() {
         return {
             routes: [

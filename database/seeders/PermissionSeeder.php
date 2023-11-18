@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\Variables;
 use App\Models\User;
+use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -35,6 +36,9 @@ class PermissionSeeder extends Seeder
                 ['name' => 'user.delete', 'section' => 'user'],
                 ['name' => 'user.block', 'section' => 'user'],
                 ['name' => 'user.my', 'section' => 'user'],
+                ['name' => 'user.profile', 'section' => 'user'],
+                ['name' => 'user.changePassword', 'section' => 'user'],
+                ['name' => 'user.changePersonal', 'section' => 'user'],
             ],
             'role' => [
                 ['name' => 'role.list', 'section' => 'role'],
@@ -75,7 +79,10 @@ class PermissionSeeder extends Seeder
                 }
             }
         }
-        // Permission::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Permission::truncate();
+        Role::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Permission::insert($data);
 
         $allPermissions = Permission::all();
@@ -93,11 +100,11 @@ class PermissionSeeder extends Seeder
         /*
         **ADD PERMISSIONS TO GUEST ROLE
         */
-        $role->syncPermissions([
-            'admin.dashboard',
-            'user.update',
-            'user.my'
-        ]);
+        // $role->syncPermissions([
+        //     'admin.dashboard',
+        //     'user.update',
+        //     'user.my'
+        // ]);
 
 
         $admin_user['name'] = 'SUPER ADMIN';
