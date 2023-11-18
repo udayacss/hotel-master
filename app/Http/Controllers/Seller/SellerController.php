@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Seller;
 
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
+use App\Models\Board;
 use App\Models\Seller;
 use App\Models\SellerSubcription;
 use App\Models\User;
+use App\Rules\ReferralRule;
 use App\Services\BoardService;
 use App\Services\ReferralService;
 use Auth;
@@ -19,7 +21,9 @@ class SellerController extends Controller
 {
     public function list()
     {
-        $sellers = Seller::get();
+        $sellers = Seller::with('referral', 'user')
+            ->where('is_active', Status::SELLER_ACTIVE)
+            ->get();
         return Inertia::render('Admin/Seller/List', compact('sellers'));
     }
 
@@ -32,10 +36,10 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'referral' => 'required|exists:referrals,ref_no',
+            'referral' => ['required', new ReferralRule()],
             'first_name' => 'required',
             'last_name' => 'required',
-            'level_id' => 'required',
+            // 'level_id' => 'required',
             'email' => 'required',
             'mobile_no' => 'required',
         ];
@@ -59,21 +63,26 @@ class SellerController extends Controller
         $seller->last_name =  $request->last_name;
         $seller->mobile_no =  $request->mobile_no;
         $seller->my_referrel_id =  $referral->id;
-        $seller->referrer_id = (new ReferralService())->getReferral($request->referral);
+
+        $referral = (new ReferralService())->getReferral($request->referral);
+
+        $seller->referrer_id = $referral->user_id;
         $seller->save();
 
         $subscription = SellerSubcription::create([
             'code' => '123',
             'seller_id' =>  $seller->id,
-            'level_id' => $request->level_id,
+            'level_id' => 1,
+            // 'level_id' => $request->level_id,
             'ref_no' => $request->referral,
             'status' => Status::SUBSCRIPTION_INACTIVE
         ]);
 
+
+
         DB::commit();
-
-        // (new BoardService())->createNewBoard(2);
-
         return response()->json(['success' => true]);
     }
+
+  
 }

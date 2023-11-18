@@ -9,7 +9,7 @@
                         class="img-fluid rounded"
                         alt=""
                     />
-                    <span>API</span>
+                    <span>HM</span>
                 </a>
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu">
@@ -150,6 +150,42 @@ export default {
                             name: "LIST",
                             icon: "la-list",
                             link: "admin.seller.list",
+                        },
+                    ],
+                    /* User section edning */
+                },
+                {
+                    /* Boards section starting */
+                    name: "Boards",
+                    permission: "board.list",
+                    path_name: "/board",
+                    icon: "la-user-tie",
+                    id: "#boardinfo",
+                    id_n: "boardinfo",
+                    sub: [
+                        {
+                            permission: "board.list",
+                            name: "LIST",
+                            icon: "la-list",
+                            link: "admin.board.list",
+                        },
+                    ],
+                    /* User section edning */
+                },
+                {
+                    /* Subscriprion section starting */
+                    name: "Subscription",
+                    permission: "subscription.list",
+                    path_name: "/subscriprtion",
+                    icon: "la-user-tie",
+                    id: "#subscriptioninfo",
+                    id_n: "subscriptioninfo",
+                    sub: [
+                        {
+                            permission: "subscription.list",
+                            name: "LIST",
+                            icon: "la-list",
+                            link: "admin.subscription.list",
                         },
                     ],
                     /* User section edning */

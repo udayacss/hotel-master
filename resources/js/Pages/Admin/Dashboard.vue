@@ -35,7 +35,7 @@ export default {
                                 >
                                     <i class="ri-focus-2-line"></i>
                                 </div>
-                                <p class="text-secondary">Total Quotations</p>
+                                <p class="text-secondary">Total Sellings</p>
                                 <div
                                     class="d-flex align-items-center justify-content-between"
                                 >
@@ -89,7 +89,7 @@ export default {
                                 class="iq-card-header d-flex justify-content-between"
                             >
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Quotations</h4>
+                                    <h4 class="card-title">Sellings</h4>
                                 </div>
                                 <div
                                     class="iq-card-header-toolbar d-flex align-items-center"

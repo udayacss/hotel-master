@@ -22,7 +22,7 @@
                                     class="img-fluid rounded"
                                     alt=""
                                 />
-                                <span>API (PVT) LTD</span>
+                                <span>HM (PVT) LTD</span>
                             </a>
                         </div>
                     </div>

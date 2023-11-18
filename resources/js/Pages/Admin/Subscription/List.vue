@@ -9,7 +9,9 @@
                                 class="iq-card-header d-flex justify-content-between"
                             >
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Seller List</h4>
+                                    <h4 class="card-title">
+                                        Subscription List
+                                    </h4>
                                 </div>
                             </div>
                             <div class="iq-card-body">
@@ -40,38 +42,7 @@
                                         <div class="col-sm-12 col-md-6">
                                             <div
                                                 class="user-list-files d-flex float-right"
-                                            >
-                                                <Link
-                                                    as="button"
-                                                    method="get"
-                                                    class="iq-bg-danger btn"
-                                                    :href="
-                                                        route(
-                                                            'admin.seller.create'
-                                                        )
-                                                    "
-                                                >
-                                                    ADD NEW
-                                                </Link>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Print
-                                                </a>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Excel
-                                                </a>
-                                                <a
-                                                    class="iq-bg-primary"
-                                                    href="javascript:void();"
-                                                >
-                                                    Pdf
-                                                </a>
-                                            </div>
+                                            ></div>
                                         </div>
                                     </div>
                                     <table
@@ -83,42 +54,29 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Referral</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
+                                                <th>Level</th>
                                                 <th>Join Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr
-                                                v-for="(user, index) in sellers"
+                                                v-for="(item, index) in v_subs"
                                                 :key="index"
                                             >
                                                 <td>
                                                     {{
-                                                        user.first_name +
+                                                        item.first_name +
                                                         " " +
-                                                        user.last_name
+                                                        item.last_name
                                                     }}
                                                 </td>
-                                                <td>{{ user.mobile_no }}</td>
-                                                <td>
-                                                    {{ user.referral?.ref_no }}
-                                                </td>
-                                                <td>{{ user.user.email }}</td>
-                                                <td>
-                                                    <span
-                                                        class="badge iq-bg-primary"
-                                                        >Active</span
-                                                    >
-                                                </td>
+                                                <td>{{ item.level_id }}</td>
 
                                                 <td>
                                                     {{
                                                         formatDate(
-                                                            user.created_at
+                                                            item.created_at
                                                         )
                                                     }}
                                                 </td>
@@ -126,7 +84,7 @@
                                                     <div
                                                         class="flex align-items-center list-user-action"
                                                     >
-                                                        <!-- <button
+                                                        <button
                                                             class="btn iq-bg-primary"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
@@ -134,36 +92,14 @@
                                                             data-original-title="Add"
                                                             @click="
                                                                 aproveSeller(
-                                                                    user.id
+                                                                    item.sub_id
                                                                 )
                                                             "
                                                         >
                                                             <i
                                                                 class="ri-user-add-line"
                                                             ></i>
-                                                        </button> -->
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Edit"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-pencil-line"
-                                                            ></i
-                                                        ></a>
-                                                        <a
-                                                            class="iq-bg-primary"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title=""
-                                                            data-original-title="Delete"
-                                                            href="#"
-                                                            ><i
-                                                                class="ri-delete-bin-line"
-                                                            ></i
-                                                        ></a>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -248,35 +184,34 @@ export default {
     },
 
     props: {
-        sellers: Object,
+        subs: Object,
     },
     data() {
         return {
             errors: [],
+            v_subs: this.subs,
         };
     },
     methods: {
         formatDate(date) {
             return moment(date).format("YYYY/MM/DD");
         },
-        aproveSeller(seller_id) {
-            this.showConfirmAlert(seller_id);
+        aproveSeller(subscription_id) {
+            this.showConfirmAlert(subscription_id);
         },
-        async approve(seller_id) {
+        async approve(subscription_id) {
             this.button_status = false; // setting button disable while submitting
             try {
                 const response = await axios.post(
-                    route("admin.seller.approve"),
+                    route("admin.subscription.approve"),
                     {
-                        seller_id: seller_id,
+                        subscription_id: subscription_id,
                     }
                 );
                 if (response.data.success) {
                     this.showAlert("Approved");
+                    this.v_subs = response.data.data;
                     this.errors = [];
-                    if (!this.role) {
-                        this.form.reset();
-                    }
                 }
             } catch (error) {
                 if (error.response.status === 422) {
@@ -300,7 +235,7 @@ export default {
                 timer: time,
             });
         },
-        showConfirmAlert(seller_id) {
+        showConfirmAlert(subscription_id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -311,7 +246,7 @@ export default {
                 confirmButtonText: "Yes, Approve !",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.approve(seller_id);
+                    this.approve(subscription_id);
                 }
             });
         },
