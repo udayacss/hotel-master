@@ -3,7 +3,7 @@
         <div id="content-page" class="content-page">
             <div class="container-fluid">
                 <div class="container">
-                    <board-round :boards="this.v_boards" />
+                    <board-round :boards="this.v_boards" :my_seller_account="v_my_seller_account" />
                 </div>
             </div>
         </div>
@@ -24,10 +24,12 @@ export default {
 
     props: {
         boards: Object,
+        my_seller_account: Object,
     },
     data() {
         return {
             v_boards: this.boards,
+            v_my_seller_account: this.my_seller_account,
         };
     },
     mounted() {

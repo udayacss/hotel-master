@@ -28,16 +28,18 @@ class DashboardController extends Controller
         if (!$user) {
             abort(404);
         }
-        $my_seller_account = Seller::where('user_id', $user->id)->first();
-            if (!$my_seller_account) {
+        $my_seller_account = Seller::with('sponsor.refNo', 'refNo')
+            ->where('user_id', $user->id)
+            ->first();
+        if (!$my_seller_account) {
             abort(404);
         }
         $participating_boards = BoardSlot::where('seller_id', $my_seller_account->id)->pluck('board_id')->toArray();
-         if (!$participating_boards) {
+        if (!$participating_boards) {
             abort(404);
         }
         $boards = Board::with([
-            'owner',
+            'owner.user',
             'one.referral',
             'two.referral',
             'three.referral',
@@ -51,14 +53,27 @@ class DashboardController extends Controller
             'eleven.referral',
             'twelve.referral',
             'thirteen.referral',
-            'slots'
+            'one.refNo',
+            'two.refNo',
+            'three.refNo',
+            'four.refNo',
+            'five.refNo',
+            'six.refNo',
+            'seven.refNo',
+            'eight.refNo',
+            'nine.refNo',
+            'ten.refNo',
+            'eleven.refNo',
+            'twelve.refNo',
+            'thirteen.refNo',
+            'slots.seller.refNo'
         ])->whereIn('id', $participating_boards)
             ->get();
-        return Inertia::render('User/Dashboard',compact('boards'));
+        return Inertia::render('User/Dashboard', compact('boards','my_seller_account'));
     }
+    
     public function guest()
     {
-
         return Inertia::render('Seller/Subscription/Guest');
     }
 }
