@@ -24,4 +24,9 @@ class Seller extends Model
     {
         return $this->hasOne(User::class, 'id', 'referrer_id');
     }
+    //sponsor of me
+    public function sponsor()
+    {
+        return $this->hasOne(Seller::class, 'id', 'my_reffer_seller_id');
+    }
 }

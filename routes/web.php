@@ -11,6 +11,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\Test\ReCorrectionController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
@@ -53,12 +54,13 @@ Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('gues
 Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->can('admin.dashboard');
+    Route::get('/rollback/subscription-approve/{id}', [ReCorrectionController::class, 'rollbackSubscriptionApprove']);
 
     Route::prefix('/user')->group(function () {
         Route::get('/', [UserController::class, 'list'])->name('admin.user.list')->can('user.list');
-        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile')->can('user.profile');
-        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword')->can('user.changePassword');
-        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal')->can('admin.user.changePersonal');
+        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile');
+        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword');
+        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal');
         Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit')->can('user.edit');
         Route::get('/create', [UserController::class, 'create'])->name('admin.user.create')->can('user.create');
         Route::get('/my', [DashboardController::class, 'my'])->name('admin.user.my')->can('user.my');
