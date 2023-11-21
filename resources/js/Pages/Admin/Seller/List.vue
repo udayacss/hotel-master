@@ -85,6 +85,7 @@
                                                 <th>Name</th>
                                                 <th>Contact</th>
                                                 <th>Referral</th>
+                                                <th>Earnings</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Join Date</th>
@@ -106,6 +107,9 @@
                                                 <td>{{ user.mobile_no }}</td>
                                                 <td>
                                                     {{ user.ref_no.ref_no}}
+                                                </td>
+                                                <td >
+                                                    {{ user.earnings_balance_sum_points}}
                                                 </td>
                                                 <td>{{ user.user.email }}</td>
                                                 <td>

@@ -7,6 +7,7 @@ use App\Models\Board;
 use App\Models\BoardSlot;
 use App\Models\Referral;
 use App\Models\Seller;
+use App\Models\SellerEarning;
 use App\Models\SellerSubcription;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -33,12 +34,11 @@ class BoardService
             'from_board_id' => $from
         ]);
 
-
-        BoardSlot::create([
-            'seller_id' => $owner_id,
-            'board_id' => $board->id,
-            'ref_seller_id' => 0,
-        ]);
+        $this->createBoardSlot(
+            boardId: $board->id,
+            sellerId: $owner_id,
+            refSellerId: 0
+        );
 
         return $board->id;
     }
@@ -116,12 +116,14 @@ class BoardService
             $subscription->status = Status::SUBSCRIPTION_CHECKED;
             $subscription->save();
 
-            BoardSlot::create([
-                'board_id' => $available_board->id,
-                'seller_id' => $seller->id,
-                'ref_seller_id' => $ref_seller->id,
-                'subscription_id' => $subscription_id,
-            ]);
+            $this->createBoardSlot(
+                boardId: $available_board->id,
+                sellerId: $seller->id,
+                refSellerId: $ref_seller->id,
+                subscriptionId: $subscription_id,
+                sellerEarningType: SellerEarning::DIRECT_SALE
+            );
+
             if ($board_closed) {
                 $this->closeBoard($available_board->id);
             }
@@ -308,11 +310,11 @@ class BoardService
 
         $available_board->save();
 
-        BoardSlot::create([
-            'board_id' => $available_board->id,
-            'seller_id' => $seller->id,
-            'ref_seller_id' => $ref_seller->id,
-        ]);
+        $this->createBoardSlot(
+            boardId: $available_board->id,
+            sellerId: $seller->id,
+            refSellerId: $ref_seller->id
+        );
     }
 
     // public function assignToBoard($referrer_id, $seller_id)
@@ -343,5 +345,33 @@ class BoardService
         }
 
         return $subs;
+    }
+
+    private function createBoardSlot(
+        int $boardId,
+        int $sellerId,
+        int $refSellerId,
+        ?int $subscriptionId = null,
+        ?string $sellerEarningType = null
+    ) {
+        $slot = BoardSlot::create([
+            'board_id' => $boardId,
+            'seller_id' => $sellerId,
+            'ref_seller_id' => $refSellerId,
+            'subscription_id' => $subscriptionId,
+        ]);
+
+        if (isset($sellerEarningType)) {
+            if ($sellerEarningType == SellerEarning::DIRECT_SALE) {
+
+                SellerEarning::create([
+                    'board_slot_id' => $slot->id,
+                    'type' => SellerEarning::DIRECT_SALE,
+                    'points' => SellerEarning::DIRECT_SALE_VALUE,
+                    'seller_id' => $refSellerId,
+                    'status' => SellerEarning::NOT_PAID
+                ]);
+            }
+        }
     }
 }
