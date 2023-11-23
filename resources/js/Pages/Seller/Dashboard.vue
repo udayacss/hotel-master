@@ -4,9 +4,8 @@ import moment from "moment";
 
 export default {
     props: {
-        allWithdrawals: Number,
-        paidWithdrawals: Number,
-        pendingWithdrawals: Number,
+        totalEranings: Number,
+        withdrawals: Number,
     },
     components: {
         AppLayout,
@@ -37,12 +36,12 @@ export default {
                                 >
                                     <i class="ri-focus-2-line"></i>
                                 </div>
-                                <p class="text-secondary">Total Withdrwals</p>
+                                <p class="text-secondary">Total Earnings</p>
                                 <div
                                     class="d-flex align-items-center justify-content-between"
                                 >
                                     <h4>
-                                        <b>{{ allWithdrawals }}</b>
+                                        <b>{{ totalEranings }}</b>
                                     </h4>
                                     <div id="iq-chart-box1"></div>
                                     <span class="text-primary"
@@ -65,47 +64,20 @@ export default {
                                 >
                                     <i class="ri-exchange-dollar-fill"></i>
                                 </div>
-                                <p class="text-secondary">
-                                    Pending Withdrawals
-                                </p>
+                                <p class="text-secondary">Withdrwed</p>
                                 <div
                                     class="d-flex align-items-center justify-content-between"
                                 >
                                     <h4>
-                                        <b>{{ pendingWithdrawals }}</b>
+                                        <b>{{ withdrawals }}</b>
                                     </h4>
                                     <div id="iq-chart-box3"></div>
                                     <span class="text-success"
                                         ><b>
                                             <!-- +0.36% -->
-                                            <i class="ri-arrow-up-fill"></i></b
-                                    ></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3">
-                        <div
-                            class="iq-card iq-card-block iq-card-stretch iq-card-height"
-                        >
-                            <div class="iq-card-body iq-box-relative">
-                                <div
-                                    class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-success"
-                                >
-                                    <i class="ri-exchange-dollar-fill"></i>
-                                </div>
-                                <p class="text-secondary">Paid Withdrawals</p>
-                                <div
-                                    class="d-flex align-items-center justify-content-between"
-                                >
-                                    <h4>
-                                        <b>{{ paidWithdrawals }}</b>
-                                    </h4>
-                                    <div id="iq-chart-box3"></div>
-                                    <span class="text-success"
-                                        ><b>
-                                            <!-- +0.36% -->
-                                            <i class="ri-arrow-up-fill"></i></b
+                                            <i
+                                                class="ri-arrow-down-fill"
+                                            ></i></b
                                     ></span>
                                 </div>
                             </div>

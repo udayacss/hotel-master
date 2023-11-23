@@ -21,6 +21,9 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
 
+    const NORMAL_USER = 1;
+    const ADMIN = 2;
+    const MANAGER = 3;
     /**
      * The attributes that are mass assignable.
      *

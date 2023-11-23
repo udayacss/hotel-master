@@ -7,6 +7,10 @@ use App\Models\Board;
 use App\Models\BoardSlot;
 use App\Models\QuotationRequirement;
 use App\Models\Seller;
+use App\Models\SellerEarning;
+use App\Models\User;
+use App\Services\SellerService;
+use App\Services\UserService;
 use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -20,7 +24,24 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return Inertia::render('Admin/Dashboard');
+
+        if ((new UserService())->getUserRole() == User::NORMAL_USER) {
+            $totalEranings = SellerEarning::where('seller_id', (new SellerService())->getSellerAcount()->id)->get();
+
+            $withdrawals = $totalEranings->where('status', SellerEarning::PAID)->sum('points');
+            $totalEranings = $totalEranings->sum('points');
+            return Inertia::render('Seller/Dashboard', compact('totalEranings', 'withdrawals'));
+        }
+
+        if ((new UserService())->getUserRole() == User::ADMIN) {
+
+            $allWithdrawals = SellerEarning::all();
+
+            $pendingWithdrawals = $allWithdrawals->where('status', SellerEarning::NOT_PAID)->sum('points');
+            $paidWithdrawals = $allWithdrawals->where('status', SellerEarning::PAID)->sum('points');
+            $allWithdrawals = $allWithdrawals->sum('points');
+            return Inertia::render('Admin/Dashboard', compact('pendingWithdrawals', 'paidWithdrawals', 'allWithdrawals'));
+        }
     }
     public function my()
     {
@@ -69,9 +90,9 @@ class DashboardController extends Controller
             'slots.seller.refNo'
         ])->whereIn('id', $participating_boards)
             ->get();
-        return Inertia::render('User/Dashboard', compact('boards','my_seller_account'));
+        return Inertia::render('User/Dashboard', compact('boards', 'my_seller_account'));
     }
-    
+
     public function guest()
     {
         return Inertia::render('Seller/Subscription/Guest');

@@ -79,6 +79,7 @@ class SellerController extends Controller
             'name' => $request->first_name,
             'email' => $request->email,
             'name' => $request->first_name,
+            'role' => User::NORMAL_USER,
             'password' => Hash::make('Abcd@1234'),
         ]);
         $user->assignRole((new RoleService)->getGuestRole());
