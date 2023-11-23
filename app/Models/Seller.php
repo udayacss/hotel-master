@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Seller extends Model
 {
     use HasFactory;
-
+    const ACTIVE = 1;
+    const INACTIVE = 0;
 
     public function refNo()
     {
@@ -24,7 +25,7 @@ class Seller extends Model
     {
         return $this->hasOne(User::class, 'id', 'referrer_id');
     }
-    
+
     //sponsor of me
     public function sponsor()
     {

@@ -123,6 +123,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 7,
         ],
+        'withdrawals' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/er/withdrawals/error.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 7,
+        ],
     ],
 
 ];

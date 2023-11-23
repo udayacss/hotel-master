@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\Test\ReCorrectionController;
+use App\Http\Controllers\API\Admin\Seller\SellerController as SellerSellerController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
@@ -106,7 +107,16 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/export/{id}', [PdfController::class, 'export'])->name('admin.pdf.export');
 
-    Route::prefix('/api/general')->group(function () {
-        Route::get('/nav', [GeneralSettingsController::class, 'getNavData'])->name('api.getNavData');
+    Route::prefix('/api')->group(function () {
+
+        Route::prefix('/general')->group(function () {
+            Route::get('/nav', [GeneralSettingsController::class, 'getNavData'])->name('api.getNavData');
+        });
+        Route::prefix('/seller')->group(function () {
+            Route::get('/search', [SellerSellerController::class, 'searchSeller'])->name('api.searchSeller');
+        });
+        Route::prefix('/admin')->group(function () {
+            Route::get('/withdraw', [SellerSellerController::class, 'withdraw'])->name('api.withdraw');
+        });
     });
 });

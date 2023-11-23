@@ -19,8 +19,7 @@ export default {
             v_my_seller_account: this.my_seller_account,
         };
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
         formatdate(date) {
             const formattedDate = moment(date).format("YYYY/MM/DD");
@@ -37,7 +36,10 @@ export default {
             <div class="container-fluid">
                 <!-- Container -->
                 <div class="container">
-                    <board-round :boards="v_boards" :my_seller_account="v_my_seller_account" />
+                    <board-round
+                        :boards="v_boards"
+                        :my_seller_account="v_my_seller_account"
+                    />
                 </div>
             </div>
         </div>
