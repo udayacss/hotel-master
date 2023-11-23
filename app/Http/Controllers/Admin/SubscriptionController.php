@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
 
         $request->validate($rules);
 
-        // try {
+        try {
 
             $subscription_id = (new EncryptService())->decryptUsingRandom($request->subscription_id);
 
@@ -62,8 +62,8 @@ class SubscriptionController extends Controller
             );
 
             return response()->json(['success' => true, 'data' => (new BoardService())->getPendingSubscriptions()], 200);
-        // } catch (Exception $e) {
-        //     return response()->json(['success' => false, 'data' => $e->getMessage()], 200);
-        // }
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'data' => $e->getMessage()], 200);
+        }
     }
 }

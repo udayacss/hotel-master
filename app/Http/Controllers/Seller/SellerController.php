@@ -22,7 +22,8 @@ class SellerController extends Controller
 {
     public function list()
     {
-        $sellers = Seller::with('referral', 'user','refNo')
+        $sellers = Seller::with('referral', 'user', 'refNo')
+            ->withSum('earningsBalance', 'points')
             ->where('is_active', Status::SELLER_ACTIVE)
             ->get();
         return Inertia::render('Admin/Seller/List', compact('sellers'));
@@ -48,7 +49,7 @@ class SellerController extends Controller
         $request->validate($rules);
 
         $this->saveSeller($request);
-        
+
         return response()->json(['success' => true]);
     }
     public function storeGuest(Request $request)
