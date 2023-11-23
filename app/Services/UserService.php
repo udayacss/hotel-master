@@ -13,4 +13,9 @@ class UserService
     {
         dd($data);
     }
+
+    public function getUserRole(): int
+    {
+        return Auth::user()->role;
+    }
 }

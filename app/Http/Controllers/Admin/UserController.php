@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\UserService;
 use App\Traits\ErrorLogTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,11 @@ class UserController extends Controller
 
     public function list()
     {
-        $users = User::with('roles', 'seller')->get();
+        $users  = [];
+        if ((new UserService())->getUserRole() == User::ADMIN) {
+
+            $users = User::with('roles', 'seller')->get();
+        }
         return Inertia::render('Admin/User/List', compact('users'));
     }
 

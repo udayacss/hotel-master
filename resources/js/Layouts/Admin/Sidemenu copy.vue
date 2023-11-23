@@ -214,7 +214,6 @@ export default {
     Link,
   },
   created() {
-    //  console.log($page.props);
   },
   data() {
     return {

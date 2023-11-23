@@ -53,9 +53,7 @@ export default {
         };
     },
     mounted() {
-        // console.log("Component mounted.");
         if (this.image_link) {
-            console.log(this.v_image_link);
             this.file_name = this.getNameByLink(this.image_link);
         }
     },
@@ -103,7 +101,6 @@ export default {
                         currentObj.v_image_link
                 )
                 .then(function (response) {
-                    console.log(response.data);
                     // currentObj.file_name = "";
                 })
                 .catch(function (error) {

@@ -20,7 +20,6 @@ export default {
         };
     },
     mounted() {
-        console.log(this.v_my_seller_account);
     },
     methods: {
         formatdate(date) {

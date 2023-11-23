@@ -704,7 +704,6 @@ export default {
                     this.form.unit_count = 0;
                 }
                 this.form.requested_capacity = this.form.capacity;
-                console.log(this.form.requested_capacity);
                 var capacities = [];
                 this.unite_ranges.forEach((range) => {
                     if (range.capacity >= this.form.capacity) {
@@ -737,7 +736,6 @@ export default {
                 onSuccess: (res) => {
                     this.showAlert("Details Changed");
                     // this.form.reset();
-                    console.log(res.data);
                     // window.location.href = route("admin.price_list.index");
                 },
                 onError: (er) => {

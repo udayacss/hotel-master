@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GemCategoryController;
+use App\Http\Controllers\Admin\GeneralSettingsController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\UserController;
@@ -104,4 +105,8 @@ Route::middleware(['auth:web'])->group(function () {
     });
 
     Route::get('/export/{id}', [PdfController::class, 'export'])->name('admin.pdf.export');
+
+    Route::prefix('/api/general')->group(function () {
+        Route::get('/nav', [GeneralSettingsController::class, 'getNavData'])->name('api.getNavData');
+    });
 });
