@@ -146,13 +146,26 @@ class BoardService
         $owner->achieved = status::SUBSCRIPTION_ACHIEVED;
         $owner->save();
 
+        $board_members = BoardSlot::where('seller_id', '!=', $board->owner_seller_id)
+            ->where('board_id', $board->id)
+            ->pluck('seller_id')
+            ->toArray();
 
         $board_sales = BoardSlot::where('seller_id', '!=', $board->owner_seller_id)
             // ->where('ref_seller_id', '!=', $board->owner_seller_id)
             ->where('board_id', $board->id)
-            ->pluck('ref_seller_id')->toArray();
+            ->whereIn('seller_id', $board_members)
+            ->pluck('ref_seller_id')
+            ->toArray();
 
-        $sales = array_count_values($board_sales);
+        $newBoardSales = [];
+        foreach ($board_sales as $bSale) {
+            if (in_array($bSale, $board_members)) {
+                array_push($newBoardSales, $bSale);
+            }
+        }
+
+        $sales = array_count_values($newBoardSales);
 
         /* 
             creating new boards starts

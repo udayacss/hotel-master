@@ -56,7 +56,12 @@ Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('gues
 Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->can('admin.dashboard');
-    Route::get('/rollback/subscription-approve/{id}', [ReCorrectionController::class, 'rollbackSubscriptionApprove']);
+    Route::prefix('/marvel')->group(function () {
+        Route::prefix('/rollback')->group(function () {
+            Route::get('/subscription-approve/{id}', [ReCorrectionController::class, 'rollbackSubscriptionApprove']);
+        });
+        Route::get('/subscription-approve', [ReCorrectionController::class, 'startSubscriptionApprove']);
+    });
 
     Route::prefix('/user')->group(function () {
         Route::get('/', [UserController::class, 'list'])->name('admin.user.list')->can('user.list');

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Board;
 use App\Models\BoardSlot;
 use App\Models\SellerSubcription;
+use App\Services\BoardService;
 use DB;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,32 @@ class ReCorrectionController extends Controller
             $this->updateProtectedBoard(protected_board_id: $protected_board_id);
             $this->clearSubscriptions();
         });
+        return "success";
+    }
+
+    public function startSubscriptionApprove(): string
+    {
+
+        $subs = SellerSubcription::with('seller')
+            ->join('sellers', 'sellers.id', 'seller_subcriptions.seller_id')
+            ->where('seller_subcriptions.status', Status::SUBSCRIPTION_INACTIVE)
+            ->select(
+                'sellers.id',
+                'sellers.first_name',
+                'sellers.last_name',
+                'seller_subcriptions.level_id',
+                'seller_subcriptions.created_at',
+                'seller_subcriptions.bank_ref',
+                'seller_subcriptions.seller_id',
+                'seller_subcriptions.id as sub_id'
+            )
+            ->get();
+
+        foreach ($subs as $sub) {
+            (new BoardService())->updateAvailableBoardAndAssign(
+                subscription_id: $sub->id
+            );
+        }
         return "success";
     }
 
