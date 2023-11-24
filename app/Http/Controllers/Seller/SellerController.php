@@ -25,7 +25,8 @@ class SellerController extends Controller
         $sellers = Seller::with('referral', 'user', 'refNo')
             ->withSum('earningsBalance', 'points')
             ->where('is_active', Status::SELLER_ACTIVE)
-            ->get();
+            ->orderBy('id', 'desc')
+            ->paginate(20);
         return Inertia::render('Admin/Seller/List', compact('sellers'));
     }
 
