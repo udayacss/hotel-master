@@ -155,6 +155,7 @@ class BoardService
             // ->where('ref_seller_id', '!=', $board->owner_seller_id)
             ->where('board_id', $board->id)
             ->whereIn('seller_id', $board_members)
+            ->orderBy('ref_seller_id', 'asc')
             ->pluck('ref_seller_id')
             ->toArray();
 
@@ -164,11 +165,9 @@ class BoardService
                 array_push($newBoardSales, $bSale);
             }
         }
-
         $sales = array_count_values($newBoardSales);
-
         /* 
-            creating new boards starts
+        creating new boards starts
         */
 
         $board_owners = [];
