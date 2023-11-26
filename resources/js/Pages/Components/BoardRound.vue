@@ -292,19 +292,22 @@
                     <span class="text1 badge badge-secondary mr-3">1</span>
                     <div class="ms-2 w-100">
                         User 1
-                        <div class="font-weight-bold d-flex">
+                        <div class="font-weight-bold d-flex align-items-center">
                             HM645656
-                            <a href="#" class="ml-auto">View more</a>
+                            <span class="badge badge-secondary mx-1">User A [HM1231]</span>
+                            <span class="badge badge-secondary mx-1">User B [HM1231]</span>
+                            <span class="badge badge-secondary mx-1">User C [HM1231]</span>
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item d-flex align-items-start">
-                    <span class="text1 badge badge-secondary mr-3">1</span>
+                    <span class="text1 badge badge-secondary mr-3">2</span>
                     <div class="ms-2 w-100">
                         User 2
-                        <div class="font-weight-bold d-flex">
+                        <div class="font-weight-bold d-flex align-items-center">
                             HM645657
-                            <a href="#" class="ml-auto">View more</a>
+                            <span class="badge badge-secondary mx-1">User D [HM1231]</span>
+                            <span class="badge badge-secondary mx-1">User D [HM1231]</span>
                         </div>
                     </div>
                 </li>
