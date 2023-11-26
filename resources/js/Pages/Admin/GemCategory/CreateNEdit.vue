@@ -183,7 +183,6 @@ export default {
     },
     methods: {
         submit() {
-            // return console.log(this.form);
             this.button_status = false; // setting button disable while submitting
             this.form.post(route("admin.gem_cat.store"), {
                 onSuccess: (res) => {

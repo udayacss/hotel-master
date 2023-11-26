@@ -507,7 +507,6 @@ export default {
         boards: Object,
     },
     mounted() {
-        console.log(this.boards);
     },
 };
 </script>

@@ -22,9 +22,11 @@ class SellerController extends Controller
 {
     public function list()
     {
-        $sellers = Seller::with('referral', 'user','refNo')
+        $sellers = Seller::with('referral', 'user', 'refNo')
+            ->withSum('earningsBalance', 'points')
             ->where('is_active', Status::SELLER_ACTIVE)
-            ->get();
+            ->orderBy('id', 'desc')
+            ->paginate(20);
         return Inertia::render('Admin/Seller/List', compact('sellers'));
     }
 
@@ -48,7 +50,7 @@ class SellerController extends Controller
         $request->validate($rules);
 
         $this->saveSeller($request);
-        
+
         return response()->json(['success' => true]);
     }
     public function storeGuest(Request $request)
@@ -78,6 +80,7 @@ class SellerController extends Controller
             'name' => $request->first_name,
             'email' => $request->email,
             'name' => $request->first_name,
+            'role' => User::NORMAL_USER,
             'password' => Hash::make('Abcd@1234'),
         ]);
         $user->assignRole((new RoleService)->getGuestRole());

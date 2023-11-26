@@ -3,7 +3,7 @@
         <!-- Sidebar  -->
         <div class="iq-sidebar">
             <div class="iq-navbar-logo d-flex justify-content-between">
-                <a :href="route('admin.dashboard.index')" class="header-logo">
+                <a :href="route('admin.dashboard')" class="header-logo">
                     <img
                         :src="'/images/logo.png'"
                         class="img-fluid rounded"
@@ -102,9 +102,7 @@ export default {
     components: {
         Link,
     },
-    created() {
-        console.log(this.$page.props);
-    },
+    created() {},
     data() {
         return {
             routes: [

@@ -324,7 +324,6 @@ export default {
     },
     methods: {
         submitRole() {
-            console.log(this.selected_permissions);
         },
         setPermissions() {
             this.v_permissions = this.permissions;
@@ -334,7 +333,6 @@ export default {
         },
 
         selectPermission() {
-            console.log(this.selected_permissions);
         },
         selectAll(section,event) {
             let selected_permissions_updated = [];

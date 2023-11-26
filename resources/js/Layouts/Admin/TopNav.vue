@@ -16,14 +16,18 @@
                         <div
                             class="iq-navbar-logo d-flex justify-content-between ml-3"
                         >
-                            <a href="index.html" class="header-logo">
+                            <Link
+                                :href="route('admin.dashboard')"
+                                class="header-logo"
+                                
+                            >
                                 <img
                                     :src="'/images/logo.png'"
                                     class="img-fluid rounded"
                                     alt=""
                                 />
                                 <span>TravelTube</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div class="iq-search-bar">
@@ -57,9 +61,16 @@
                                 <a
                                     href="#"
                                     class="search-toggle iq-waves-effect bg-primary rounded"
+                                    v-if="v_notificationCount > 0"
                                 >
                                     <i class="ri-mail-line"></i>
                                     <span class="bg-danger count-mail"></span>
+                                </a>
+                                <a
+                         
+                                    v-if="v_notificationCount == 0"
+                                >
+                               
                                 </a>
                                 <div class="iq-sub-dropdown">
                                     <div class="iq-card shadow-none m-0">
@@ -68,35 +79,41 @@
                                                 <h5 class="mb-0 text-white">
                                                     All Messages<small
                                                         class="badge badge-light float-right pt-1"
-                                                        >0</small
+                                                        >{{
+                                                            v_notificationCount
+                                                        }}</small
                                                     >
                                                 </h5>
                                             </div>
-                                            <!-- <a href="#" class="iq-sub-card">
+                                            <a href="#" class="iq-sub-card">
                                                 <div
                                                     class="media align-items-center"
                                                 >
                                                     <div class="">
-                                                        <img
+                                                        <!-- <img
                                                             class="avatar-40 rounded"
                                                             :src="'/images/user/01.jpg'"
                                                             alt=""
-                                                        />
+                                                        /> -->
                                                     </div>
                                                     <div
                                                         class="media-body ml-3"
                                                     >
                                                         <h6 class="mb-0">
-                                                            Barry Emma Watson
+                                                            Pending
+                                                            Subscriptions<small
+                                                                class="badge badge-light float-right pt-1"
+                                                                >{{
+                                                                    v_pendingSubcriptions
+                                                                }}</small
+                                                            >
                                                         </h6>
                                                         <small
                                                             class="float-left font-size-12"
-                                                            >13 Jun</small
-                                                        >
+                                                        ></small>
                                                     </div>
                                                 </div>
-                                            </a> -->
-                                            
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -164,6 +181,28 @@
     </div>
 </template>
 
-<script setup>
-import { Head, Link, useForm } from "@inertiajs/vue3";
+<script>
+import { Link } from "@inertiajs/vue3";
+
+export default {
+    components: {
+        Link,
+    },
+    data() {
+        return {
+            v_pendingSubcriptions: 0,
+            v_notificationCount: 0,
+        };
+    },
+    methods: {
+        async getNavData() {
+            var res = await axios.get(route("api.getNavData"));
+            this.v_pendingSubcriptions = res?.data?.data?.sellerSubscriptions;
+            this.v_notificationCount += this.v_pendingSubcriptions;
+        },
+    },
+    mounted() {
+        this.getNavData();
+    },
+};
 </script>

@@ -11,6 +11,9 @@ class Board extends Model
 {
     use HasFactory;
 
+    const BOARD_ACTIVE = 1;
+    const BOARD_COMPLETED = 2;
+
     protected $fillable = [
         'id',
         'code',

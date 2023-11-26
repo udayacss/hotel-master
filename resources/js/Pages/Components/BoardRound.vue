@@ -74,22 +74,40 @@
                           )
                         : ""
                 }}</span> -->
-                <span class="text1 badge badge-secondary">5</span>
-                <span class="text2 badge badge-secondary">6</span>
-                <span class="text3 badge badge-secondary">7</span>
-                <span class="text4 badge badge-secondary">8</span>
-                <span class="text5 badge badge-secondary">9</span>
-                <span class="text6 badge badge-secondary">10</span>
-                <span class="text7 badge badge-secondary">11</span>
-                <span class="text8 badge badge-secondary">12</span>
-                <span class="text9 badge badge-secondary">13</span>
+                <span class="text1 badge badge-secondary" v-if="board?.five"
+                    >5</span
+                >
+                <span class="text2 badge badge-secondary" v-if="board?.six"
+                    >6</span
+                >
+                <span class="text3 badge badge-secondary" v-if="board?.seven"
+                    >7</span
+                >
+                <span class="text4 badge badge-secondary" v-if="board?.eight"
+                    >8</span
+                >
+                <span class="text5 badge badge-secondary" v-if="board?.nine"
+                    >9</span
+                >
+                <span class="text6 badge badge-secondary" v-if="board?.ten"
+                    >10</span
+                >
+                <span class="text7 badge badge-secondary" v-if="board?.eleven"
+                    >11</span
+                >
+                <span class="text8 badge badge-secondary" v-if="board?.twelve"
+                    >12</span
+                >
+                <span class="text9 badge badge-secondary" v-if="board?.thirteen"
+                    >13</span
+                >
                 <div
                     class="sector1"
                     :class="getSaleCount(board?.id, board?.five?.id)"
                     style="transform: rotate(90deg) skew(50deg)"
-                    data-toggle="modal" data-target="#modal11"
-                >
-                </div>
+                    data-toggle="modal"
+                    data-target="#modal11"
+                ></div>
                 <div
                     class="sector1"
                     :class="getSaleCount(board?.id, board?.six?.id)"
@@ -157,9 +175,17 @@
                               )
                             : ""
                     }}</span> -->
-                    <span class="text2 badge badge-secondary">2</span>
-                    <span class="text3 badge badge-secondary">3</span>
-                    <span class="text1 badge badge-secondary">4</span>
+                    <span class="text2 badge badge-secondary" v-if="board?.two"
+                        >2</span
+                    >
+                    <span
+                        class="text3 badge badge-secondary"
+                        v-if="board?.three"
+                        >3</span
+                    >
+                    <span class="text1 badge badge-secondary" v-if="board?.four"
+                        >4</span
+                    >
                     <div
                         class="sector2"
                         :class="getSaleCount(board?.id, board?.three?.id)"
@@ -194,7 +220,14 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+            class="modal fade"
+            id="modal1"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <!-- <div class="modal-header">
@@ -204,17 +237,22 @@
                         </button>
                     </div> -->
                     <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
                             <span aria-hidden="true">&times;</span>
                         </button>
                         {{
-                        board.five
-                            ? getFullName(
-                                board.five?.first_name,
-                                board.five?.last_name,
-                                board.five?.ref_seller_id
-                            )
-                            : ""
+                            board.five
+                                ? getFullName(
+                                      board.five?.first_name,
+                                      board.five?.last_name,
+                                      board.five?.ref_seller_id
+                                  )
+                                : ""
                         }}
                     </div>
                     <!-- <div class="modal-footer">
@@ -226,18 +264,17 @@
         </div>
 
         <div class="col-md-6 col-xs-12">
-            <ol class="list-group list-group-numbered">
+            <ol
+                class="list-group list-group-numbered"
+                v-if="v_my_seller_account"
+            >
                 <li
                     class="list-group-item d-flex justify-content-between align-items-start"
                 >
                     <div class="ms-2 me-auto">
                         My Package Referral
                         <div class="font-weight-bold">
-                            {{
-                                board.owner?.first_name +
-                                " " +
-                                board.owner?.last_name
-                            }}
+                            {{ v_my_seller_account?.ref_no?.ref_no }}
                         </div>
                     </div>
                 </li>
@@ -248,10 +285,12 @@
                         My Sponser
                         <div class="font-weight-bold">
                             {{
-                                board.owner?.first_name +
+                                v_my_seller_account?.sponsor?.first_name +
                                 " " +
-                                board.owner?.last_name
+                                v_my_seller_account?.sponsor?.last_name
                             }}
+                            -
+                            {{ v_my_seller_account?.sponsor?.ref_no?.ref_no }}
                         </div>
                     </div>
                 </li>
@@ -263,7 +302,7 @@
                         <div class="font-weight-bold"></div>
                     </div>
                 </li> -->
-                <li
+                <!-- <li
                     class="list-group-item d-flex justify-content-between align-items-start"
                 >
                     <div class="ms-2 me-auto">
@@ -272,7 +311,7 @@
                             {{ board.owner?.mobile_no }}
                         </div>
                     </div>
-                </li>
+                </li> -->
                 <!-- <li
                     class="list-group-item d-flex justify-content-between align-items-start"
                 >
@@ -288,32 +327,41 @@
             </ol>
 
             <ol class="list-group list-group-numbered mt-4">
-                <li class="list-group-item d-flex align-items-start">
-                    <span class="text1 badge badge-secondary mr-3">1</span>
-                    <div class="ms-2 w-100">
-                        User 1
-                        <div class="font-weight-bold d-flex align-items-center">
-                            HM645656
-                            <span class="badge badge-secondary mx-1">User A [HM1231]</span>
-                            <span class="badge badge-secondary mx-1">User B [HM1231]</span>
-                            <span class="badge badge-secondary mx-1">User C [HM1231]</span>
+                <div v-for="(slot_name, index) in v_slot_names" :key="index">
+                    <li
+                        class="list-group-item d-flex align-items-start"
+                        v-if="board[`${slot_name}`]"
+                    >
+                        <span class="text1 badge badge-secondary mr-3">{{
+                            index + 1
+                        }}</span>
+                        <div class="ms-2 w-100">
+                            {{
+                                getFullName(
+                                    board[`${slot_name}`].first_name,
+                                    board[`${slot_name}`].last_name
+                                )
+                            }}
+                            <div class="font-weight-bold d-flex">
+                                {{ board[`${slot_name}`].ref_no.ref_no }}
+                                <a href="#" class="ml-auto">
+                                    <span
+                                        class="badge badge-secondary mx-1"
+                                        v-for="(sale, index) in getSale(
+                                            board.id,
+                                            board[`${slot_name}`].id,
+                                            board.owner_seller_id
+                                        )"
+                                        :key="index"
+                                        >{{ getFullName(sale?.first_name,sale?.last_name) }} [ {{ sale?.ref_no?.ref_no }}]</span
+                                    ></a
+                                >
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex align-items-start">
-                    <span class="text1 badge badge-secondary mr-3">2</span>
-                    <div class="ms-2 w-100">
-                        User 2
-                        <div class="font-weight-bold d-flex align-items-center">
-                            HM645657
-                            <span class="badge badge-secondary mx-1">User D [HM1231]</span>
-                            <span class="badge badge-secondary mx-1">User D [HM1231]</span>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                </div>
             </ol>
         </div>
-
     </div>
 </template>
 
@@ -321,10 +369,27 @@
 export default {
     props: {
         boards: Object,
+        my_seller_account: Object,
     },
     data() {
         return {
             v_boards: this.boards,
+            v_my_seller_account: this.my_seller_account,
+            v_slot_names: [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten",
+                "eleven",
+                "twelve",
+                "thirteen",
+            ],
         };
     },
     mounted() {},
@@ -357,6 +422,27 @@ export default {
             if (sales == 1) {
                 return "one-sales";
             }
+            if (sales == 0) {
+                return "zero-sales";
+            }
+        },
+        getSale(boardId, sellerId,ownerSellerId = 0) {
+            var slots = [];
+            this.v_boards.forEach((b) => {
+                if (b.id == boardId) {
+                    slots = b.slots;
+                }
+            });
+
+            var sales = [];
+            if (slots.length > 0) {
+                slots.forEach((slot) => {
+                    if (slot.ref_seller_id == sellerId) {
+                        sales.push(slot?.seller);
+                    }
+                });
+            }
+            return sales;
         },
     },
 };

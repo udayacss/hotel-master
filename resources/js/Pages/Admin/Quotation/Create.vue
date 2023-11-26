@@ -1484,7 +1484,6 @@ export default {
                     this.form2.unit_count = 0;
                 }
                 this.form2.requested_capacity = this.form2.capacity;
-                console.log(this.form2.requested_capacity);
                 var capacities = [];
                 this.unite_ranges.forEach((range) => {
                     if (range.capacity >= this.form2.capacity) {
@@ -1524,7 +1523,6 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    console.log(error);
                     this.button_status = true; //enabling submit
                 });
             // this.form.post(route("admin.quotation.store"), {

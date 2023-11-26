@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GemCategoryController;
+use App\Http\Controllers\Admin\GeneralSettingsController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\UserController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\Test\ReCorrectionController;
+use App\Http\Controllers\API\Admin\Seller\SellerController as SellerSellerController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
@@ -53,12 +56,18 @@ Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('gues
 Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->can('admin.dashboard');
+    Route::prefix('/marvel')->group(function () {
+        Route::prefix('/rollback')->group(function () {
+            Route::get('/subscription-approve/{id}', [ReCorrectionController::class, 'rollbackSubscriptionApprove']);
+        });
+        Route::get('/subscription-approve', [ReCorrectionController::class, 'startSubscriptionApprove']);
+    });
 
     Route::prefix('/user')->group(function () {
         Route::get('/', [UserController::class, 'list'])->name('admin.user.list')->can('user.list');
-        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile')->can('user.profile');
-        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword')->can('user.changePassword');
-        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal')->can('admin.user.changePersonal');
+        Route::get('/profile', [UserController::class, 'profile'])->name('admin.user.profile');
+        Route::post('/change-password', [UserController::class, 'changePassword'])->name('admin.user.changePassword');
+        Route::post('/change-personal', [UserController::class, 'changePersonal'])->name('admin.user.changePersonal');
         Route::get('/edit', [UserController::class, 'list'])->name('admin.user.edit')->can('user.edit');
         Route::get('/create', [UserController::class, 'create'])->name('admin.user.create')->can('user.create');
         Route::get('/my', [DashboardController::class, 'my'])->name('admin.user.my')->can('user.my');
@@ -102,4 +111,17 @@ Route::middleware(['auth:web'])->group(function () {
     });
 
     Route::get('/export/{id}', [PdfController::class, 'export'])->name('admin.pdf.export');
+
+    Route::prefix('/api')->group(function () {
+
+        Route::prefix('/general')->group(function () {
+            Route::get('/nav', [GeneralSettingsController::class, 'getNavData'])->name('api.getNavData');
+        });
+        Route::prefix('/seller')->group(function () {
+            Route::get('/search', [SellerSellerController::class, 'searchSeller'])->name('api.searchSeller');
+        });
+        Route::prefix('/admin')->group(function () {
+            Route::get('/withdraw', [SellerSellerController::class, 'withdraw'])->name('api.withdraw');
+        });
+    });
 });
