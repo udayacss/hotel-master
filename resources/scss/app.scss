@@ -1,0 +1,27 @@
+@import '../scss/variable.scss';
+body {
+
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border: unset;
+    height: 50px;
+    &.btn-primary {
+        color: $white;
+        background-image: linear-gradient(to right, #c0f862 , #10a690, #1166a3, #3d4987, #402b6d);
+    }
+}
+.form-control {
+    height: 50px;
+    border: 1px solid #ccc;
+}

@@ -1,9 +1,59 @@
+<style lang="scss">
+@import '../../../../scss/variable.scss';
+.login-page {
+    // min-height: calc(100vh - 70px);
+    margin-left: 0;
+    padding: 0;
+    background-image: url('/images/bg-1.jpg');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    .btn {
+        &.btn-primary {
+            padding: 5px 30px;
+        }
+        &.corner {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    }
+    .iq-card {
+        padding: 30px 40px 40px 40px;
+        border-radius: 20px;
+        .logo {
+            height: 80px;
+            display: table;
+            margin: 0 auto 20px auto;
+        }
+        .iq-card-header {
+            border: unset;
+        }
+        .form-group {
+            label {
+                margin: 0 0 1px 0;
+            }
+        }
+        .btn-area {
+            display: flex;
+            justify-content: center;
+            margin-top: 22px;
+            column-gap: 20px;
+            .btn {
+                width: 100%;
+                max-width: 275px;
+            }
+        }
+    }
+}
+</style>
 <template>
         <!-- Page Content  -->
-        <div id="content-page" class="content-page">
+        <div id="content-page" class="content-page login-page">
+            <a class="btn btn-primary corner" href="/login">Sign in</a>
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
+                <!-- <div class="row">
+                    <div class="col-md-6">
                         <div class="iq-card">
                             <div class="iq-card-body p-0">
                                 <div class="iq-edit-list">
@@ -27,22 +77,14 @@
                                                 Login
                                             </a>
                                         </li>
-
-                                        <!-- <li class="col-md-3 p-0">
-                                            <a
-                                                class="nav-link"
-                                                data-toggle="pill"
-                                                href="#emailandsms"
-                                            >
-                                                Roles
-                                            </a>
-                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                </div> -->
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
                         <div class="iq-edit-list-data">
                             <div class="tab-content">
                                 <div
@@ -51,14 +93,13 @@
                                     role="tabpanel"
                                 >
                                     <div class="iq-card">
+                                        <img :src="'/images/travel-tube-logo.jpg'" class="logo" alt="" />
                                         <div
                                             class="iq-card-header d-flex justify-content-between"
                                         >
-                                            <div class="iq-header-title">
-                                                <h4 class="card-title">
-                                                    Create Seller
-                                                </h4>
-                                            </div>
+                                            <h3 class="card-title text-center w-100">
+                                                Create Seller
+                                            </h3>
                                         </div>
                                         <div class="iq-card-body">
                                             <form>
@@ -244,20 +285,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <button
-                                                    type="button"
-                                                    @click="submitSeller"
-                                                    class="btn btn-primary mr-2"
-                                                >
-                                                    Submit
-                                                </button>
-                                                <button
-                                                    type="reset"
-                                                    class="btn iq-bg-danger"
-                                                >
-                                                    Cancel
-                                                </button>
+                                                <div class="btn-area">
+                                                    <button
+                                                        type="reset"
+                                                        class="btn btn-secondary"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        @click="submitSeller"
+                                                        class="btn btn-primary mr-2"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -469,5 +511,3 @@ export default {
     },
 };
 </script>
-
-<style></style>

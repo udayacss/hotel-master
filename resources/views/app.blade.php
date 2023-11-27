@@ -25,13 +25,14 @@
         <link href='{{asset('fullcalendar/daygrid/main.css')}}' rel='stylesheet' />
         <link href='{{asset('fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
         <link href='{{asset('fullcalendar/list/main.css')}}' rel='stylesheet' /> --}}
-  
+
         <link rel="stylesheet" href="{{asset('css/flatpickr.min.css')}}">
         <!-- Scripts -->
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         {{-- @vite('resources/js/app.js') --}}
         {{-- @vite(['resources/css/app.css']) --}}
+        @vite(['resources/scss/app.scss'])
         @inertiaHead
     </head>
     <body class="sidebar-main-active right-column-fixed">
