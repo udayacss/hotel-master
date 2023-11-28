@@ -19,7 +19,7 @@
                             <Link
                                 :href="route('admin.dashboard')"
                                 class="header-logo"
-                                
+
                             >
                                 <img
                                     :src="'/images/logo.png'"
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="iq-search-bar">
-                        <form action="#" class="searchbox">
+                        <!-- <form action="#" class="searchbox">
                             <input
                                 type="text"
                                 class="text search-input"
@@ -40,7 +40,7 @@
                             <a class="search-link" href="#"
                                 ><i class="ri-search-line"></i
                             ></a>
-                        </form>
+                        </form> -->
                     </div>
                     <button
                         class="navbar-toggler"
@@ -67,10 +67,10 @@
                                     <span class="bg-danger count-mail"></span>
                                 </a>
                                 <a
-                         
+
                                     v-if="v_notificationCount == 0"
                                 >
-                               
+
                                 </a>
                                 <div class="iq-sub-dropdown">
                                     <div class="iq-card shadow-none m-0">
@@ -135,7 +135,7 @@
                                     <h6 class="mb-0 line-height">
                                         {{ $page.props.auth?.user?.name }}
                                     </h6>
-                                    <p class="mb-0">Manager</p>
+                                    <p class="mb-0">User</p>
                                 </div>
                             </a>
                             <div class="iq-sub-dropdown iq-user-dropdown">

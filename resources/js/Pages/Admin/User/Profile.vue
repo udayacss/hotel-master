@@ -128,19 +128,21 @@
                                                         />
                                                     </div>
                                                 </div>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-primary mr-2"
-                                                    @click="submitPersonal"
-                                                >
-                                                    Submit
-                                                </button>
-                                                <button
-                                                    type="reset"
-                                                    class="btn iq-bg-danger"
-                                                >
-                                                    Cancel
-                                                </button>
+                                                <div class="btn-area">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-primary mr-2"
+                                                        @click="submitPersonal"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                    <button
+                                                        type="reset"
+                                                        class="btn iq-bg-danger"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -249,19 +251,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-primary mr-2"
-                                                    @click="changePassword"
-                                                >
-                                                    Submit
-                                                </button>
-                                                <button
-                                                    type="reset"
-                                                    class="btn iq-bg-danger"
-                                                >
-                                                    Cancel
-                                                </button>
+                                                <div class="btn-area">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-primary mr-2"
+                                                        @click="changePassword"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                    <button
+                                                        type="reset"
+                                                        class="btn iq-bg-danger"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -517,18 +521,20 @@
                                                         value="https://getbootstrap.com"
                                                     />
                                                 </div>
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-primary mr-2"
-                                                >
-                                                    Submit
-                                                </button>
-                                                <button
-                                                    type="reset"
-                                                    class="btn iq-bg-danger"
-                                                >
-                                                    Cancel
-                                                </button>
+                                                <div class="btn-area">
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-primary mr-2"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                    <button
+                                                        type="reset"
+                                                        class="btn iq-bg-danger"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -608,4 +614,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.btn-area {
+    display: flex;
+    .btn {
+        &.btn-primary {
+
+        }
+    }
+}
+</style>

@@ -183,7 +183,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div
+                        <!-- <div
                             class="iq-card iq-card-block iq-card-stretch iq-card-height banner-image-block-bg position-relative"
                             style="
                                 background: transparent
@@ -193,7 +193,7 @@ export default {
                                 height: 440px;
                                 box-shadow: none;
                             "
-                        ></div>
+                        ></div> -->
                     </div>
                 </div>
             </div>

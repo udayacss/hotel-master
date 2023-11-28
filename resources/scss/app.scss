@@ -25,3 +25,12 @@ h1, h2, h3, h4, h5, h6 {
     height: 50px;
     border: 1px solid #ccc;
 }
+.iq-bg-primary, .iq-bg-success {
+    color: $primary !important;
+}
+i {
+    &.la-user-tie {
+        background-color: $primary !important;
+    }
+}
+// Circle styles

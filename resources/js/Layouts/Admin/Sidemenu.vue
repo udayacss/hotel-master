@@ -5,11 +5,11 @@
             <div class="iq-navbar-logo d-flex justify-content-between">
                 <a :href="route('admin.dashboard')" class="header-logo">
                     <img
-                        :src="'/images/logo.png'"
+                        :src="'/images/travel-tube-logo.jpg'"
                         class="img-fluid rounded"
                         alt=""
                     />
-                    <span>TravelTube</span>
+                    <!-- <span>TravelTube</span> -->
                 </a>
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu">
@@ -135,19 +135,25 @@ export default {
                     sub: [
                         {
                             permission: "user.update",
-                            name: "PROFILE",
-                            icon: "la-smile",
+                            name: "Dashboard",
+                            icon: "la-tachometer-alt",
+                            link: "admin.dashboard",
+                        },
+                        {
+                            permission: "user.update",
+                            name: "Profile",
+                            icon: "la-user",
                             link: "admin.user.profile",
                         },
                         {
                             permission: "user.list",
-                            name: "LIST",
+                            name: "List",
                             icon: "la-list",
                             link: "admin.user.list",
                         },
                         {
                             permission: "user.my",
-                            name: "MY",
+                            name: "My Status",
                             icon: "la-list",
                             link: "admin.user.my",
                         },

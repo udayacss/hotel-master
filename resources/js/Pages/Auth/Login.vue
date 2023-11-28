@@ -48,6 +48,20 @@ const submit = () => {
         }
     }
 }
+@media only screen and (max-width: 768px) {
+    .sign-in-page {
+        .sign-in-page-data {
+            padding: 0;
+            .sign-in-from {
+                margin-top: 0;
+                padding: 20px;
+                .iq-card-body {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
 </style>
 <template>
     <AppLayoutSignIn>

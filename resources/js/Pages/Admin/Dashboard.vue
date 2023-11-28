@@ -29,7 +29,7 @@ export default {
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <div
-                            class="iq-card iq-card-block iq-card-stretch iq-card-height"
+                            class="iq-card iq-card-block ht"
                         >
                             <div class="iq-card-body iq-box-relative">
                                 <div

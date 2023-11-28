@@ -16,6 +16,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            z-index: 99999;
         }
     }
     .iq-card {
@@ -42,6 +43,17 @@
             .btn {
                 width: 100%;
                 max-width: 275px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .login-page {
+        .iq-card {
+            margin-top: 86px;
+            padding: 20px;
+            .iq-card-body {
+                padding: 0;
             }
         }
     }
