@@ -50,6 +50,19 @@ use Inertia\Inertia;
 // });
 
 
+Route::get('/our-hotels', function () {
+    return view('our-hotels.index');
+})->name('hotels');
+
+Route::get('/our-hotels/colombo', function () {
+    return view('our-hotels.colombo');
+})->name('colombo');
+
+Route::get('/our-hotels/katharagama', function () {
+    return view('our-hotels.katharagama');
+})->name('katharagama');
+
+
 Route::get('/', [DashboardController::class, 'guest'])->name('admin.dashboard.index');
 Route::post('/guest/store', [SellerController::class, 'storeGuest'])->name('guest.seller.store');
 
