@@ -68,14 +68,14 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                        <div class="col-xl-5 col-lg-4">
                             <div class="book_room">
-                                <div class="book_btn d-none d-lg-block">
+                                <div class="book_btn">
                                     <a class="" href="/login">Login</a>
                                 </div>
-                                {{-- <div class="book_btn d-none d-lg-block">
+                                <div class="book_btn">
                                     <a class="" href="/">Register</a>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                         {{-- <div class="col-xl-5 col-lg-4 d-none d-lg-block">
