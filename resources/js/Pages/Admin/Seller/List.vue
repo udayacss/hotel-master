@@ -27,7 +27,11 @@
                                                         class="form-group mb-0"
                                                     >
                                                         <input
+                                                            @input="
+                                                                searchData()
+                                                            "
                                                             type="search"
+                                                            v-model="v_keyword"
                                                             class="form-control"
                                                             id="exampleInputSearch"
                                                             placeholder="Search"
@@ -85,6 +89,7 @@
                                                 <th>Name</th>
                                                 <th>Contact</th>
                                                 <th>Referral</th>
+                                                <th>Earnings</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Join Date</th>
@@ -93,7 +98,9 @@
                                         </thead>
                                         <tbody>
                                             <tr
-                                                v-for="(user, index) in sellers"
+                                                v-for="(
+                                                    user, index
+                                                ) in v_sellers.data"
                                                 :key="index"
                                             >
                                                 <td>
@@ -105,7 +112,18 @@
                                                 </td>
                                                 <td>{{ user.mobile_no }}</td>
                                                 <td>
-                                                    {{ user.referral?.ref_no }}
+                                                    {{ user.ref_no.ref_no }}
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        @click="
+                                                            withdraw(user.id)
+                                                        "
+                                                        class="badge iq-bg-primary btn"
+                                                        >{{
+                                                            user.earnings_balance_sum_points
+                                                        }}</span
+                                                    >
                                                 </td>
                                                 <td>{{ user.user.email }}</td>
                                                 <td>
@@ -170,61 +188,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row justify-content-between mt-3">
-                                    <div
-                                        id="user-list-page-info"
-                                        class="col-md-6"
-                                    >
-                                        <span>Showing 1 to 5 of 5 entries</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <nav
-                                            aria-label="Page navigation example"
-                                        >
-                                            <ul
-                                                class="pagination justify-content-end mb-0"
-                                            >
-                                                <li class="page-item disabled">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#"
-                                                        tabindex="-1"
-                                                        aria-disabled="true"
-                                                        >Previous</a
-                                                    >
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#"
-                                                        >1</a
-                                                    >
-                                                </li>
-                                                <li class="page-item">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#"
-                                                        >2</a
-                                                    >
-                                                </li>
-                                                <li class="page-item">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#"
-                                                        >3</a
-                                                    >
-                                                </li>
-                                                <li class="page-item">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#"
-                                                        >Next</a
-                                                    >
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                                <paginations :data="v_sellers" />
                             </div>
                         </div>
                     </div>
@@ -239,12 +203,14 @@ import AppLayout from "../../../Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/vue3";
 import moment from "moment";
 import Swal from "sweetalert2";
+import Paginations from "../Components/Paginations.vue";
 
 export default {
     components: {
         AppLayout,
         Link,
         moment,
+        Paginations,
     },
 
     props: {
@@ -253,6 +219,8 @@ export default {
     data() {
         return {
             errors: [],
+            v_keyword: "",
+            v_sellers: this.sellers,
         };
     },
     methods: {
@@ -290,6 +258,71 @@ export default {
                     this.button_status;
                 }
             }
+        },
+        async searchData() {
+            // if (this.v_keyword.length > 3) {
+            var res = await axios.get(route("api.searchSeller"), {
+                params: { keyword: this.v_keyword },
+            });
+
+            this.v_sellers = res?.data?.data;
+            // }
+        },
+        withdraw(sellerId) {
+            Swal.fire({
+                title: "Withdrwal Amount",
+                input: "text",
+                inputAttributes: {
+                    autocapitalize: "off",
+                },
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                showLoaderOnConfirm: true,
+                preConfirm: async (amount) => {
+                    try {
+                        if (amount.length > 0) {
+                            const response = await this.handleWithdraw(
+                                sellerId,
+                                amount
+                            );
+                            if (response) {
+                                Swal.fire({
+                                    title:
+                                        `Withdrawal Done to Seller : ` +
+                                        sellerId,
+                                });
+
+                                return this.searchData();
+                            } else {
+                                Swal.showValidationMessage(`Request failed`);
+                            }
+                        } else {
+                            Swal.showValidationMessage(`Invalid Amount`);
+                        }
+                    } catch (error) {
+                        Swal.showValidationMessage(`Request failed: ${error}`);
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: `Withdrawal Done to Seller : ` + sellerId,
+                        imageUrl: result.value.avatar_url,
+                    });
+                }
+            });
+        },
+        async handleWithdraw(sellerId, amount) {
+            var res = await axios.get(route("api.withdraw"), {
+                params: { amount: amount, sellerId: sellerId },
+            });
+
+            if (res.data.success) {
+                return true;
+            }
+
+            return false;
         },
         showAlert(type, time = 1500, icon = "success") {
             Swal.fire({

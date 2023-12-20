@@ -22,96 +22,135 @@ const submit = () => {
     });
 };
 </script>
-
+<style lang="scss">
+@import '../../../scss/variable.scss';
+.sign-in-page {
+    background-image: url('/images/bg-1.jpg');
+    background-size: cover;
+    .sign-in-page-data {
+        border-radius: 20px;
+        box-shadow: 3px 3px 10px rgba($black, 0.15);
+        .sign-in-from {
+            padding: 30px 40px 44px 40px;
+            .logo {
+                height: 80px;
+                margin: 0 auto 0px auto;
+                display: block;
+            }
+            .form-group {
+                label {
+                    margin: 0 0 1px 0;
+                }
+            }
+            .sign-info {
+                padding: 13px 0 0 0;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .sign-in-page {
+        .sign-in-page-data {
+            padding: 0;
+            .sign-in-from {
+                margin-top: 0;
+                padding: 20px;
+                .iq-card-body {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+</style>
 <template>
     <AppLayoutSignIn>
         <!-- Sign in Start -->
         <section class="sign-in-page">
-            <div id="container-inside">
+            <!-- <div id="container-inside">
                 <div class="cube"></div>
                 <div class="cube"></div>
                 <div class="cube"></div>
                 <div class="cube"></div>
                 <div class="cube"></div>
-            </div>
+            </div> -->
             <div class="container p-0">
-                <div class="row no-gutters height-self-center">
-                    <div class="col-sm-12 align-self-center bg-primary rounded">
-                        <div class="row m-0">
-                            <div class="col-md-5 bg-white sign-in-page-data">
-                                <div class="sign-in-from">
-                                    <h1 class="mb-0 text-center">Sign in</h1>
-                                    <p class="text-center text-dark">
-                                        Enter your email address and password to
-                                        access admin panel.
-                                    </p>
-                                    <form class="mt-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1"
-                                                >Email address</label
-                                            >
+                <div class="row justify-content-center no-gutters height-self-center">
+                    <div class="col-md-4 d-flex align-items-center rounded">
+                        <div class="col-md-12 bg-white sign-in-page-data">
+                            <div class="sign-in-from">
+                                <img :src="'/images/travel-tube-logo.jpg'" class="logo" alt="" />
+                                <h3 class="mb-0 text-center">Sign in</h3>
+                                <!-- <p class="text-center text-dark">
+                                    Enter your Email ID and password to access your dashboard.
+                                </p> -->
+                                <form class="mt-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"
+                                            >Email address</label
+                                        >
+                                        <input
+                                            type="email"
+                                            v-model="form.email"
+                                            class="form-control mb-0"
+                                            id="exampleInputEmail1"
+                                            placeholder="Enter email"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1"
+                                            >Password</label
+                                        >
+                                        <!-- <a href="#" class="float-right"
+                                            >Forgot password?</a
+                                        > -->
+                                        <input
+                                            type="password"
+                                            v-model="form.password"
+                                            class="form-control mb-0"
+                                            id="exampleInputPassword1"
+                                            placeholder="Password"
+                                        />
+                                    </div>
+                                    <!-- <div class="d-inline-block w-100">
+                                        <div
+                                            class="custom-control custom-checkbox d-inline-block mt-2 pt-1"
+                                        >
                                             <input
-                                                type="email"
-                                                v-model="form.email"
-                                                class="form-control mb-0"
-                                                id="exampleInputEmail1"
-                                                placeholder="Enter email"
+                                                type="checkbox"
+                                                class="custom-control-input"
+                                                id="customCheck1"
                                             />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1"
-                                                >Password</label
-                                            >
-                                            <a href="#" class="float-right"
-                                                >Forgot password?</a
-                                            >
-                                            <input
-                                                type="password"
-                                                v-model="form.password"
-                                                class="form-control mb-0"
-                                                id="exampleInputPassword1"
-                                                placeholder="Password"
-                                            />
-                                        </div>
-                                        <div class="d-inline-block w-100">
-                                            <div
-                                                class="custom-control custom-checkbox d-inline-block mt-2 pt-1"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="custom-control-input"
-                                                    id="customCheck1"
-                                                />
-                                                <label
-                                                    class="custom-control-label"
-                                                    for="customCheck1"
-                                                    >Remember Me</label
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="sign-info text-center">
-                                            <button
-                                                type="button"
-                                                @click="submit"
-                                                class="btn btn-primary d-block w-100 mb-2"
-                                                :class="{
-                                                    'opacity-25':
-                                                        form.processing,
-                                                }"
-                                                :disabled="form.processing"
-                                            >
-                                                Sign in
-                                            </button>
-                                            <span
-                                                class="text-dark dark-color d-inline-block line-height-2"
-                                                >Don't have an account?
-                                                <a href="#">Sign up</a></span
+                                            <label
+                                                class="custom-control-label"
+                                                for="customCheck1"
+                                                >Remember Me</label
                                             >
                                         </div>
-                                    </form>
-                                </div>
+                                    </div> -->
+                                    <div class="sign-info text-center">
+                                        <button
+                                            type="button"
+                                            @click="submit"
+                                            class="btn btn-primary d-block w-100 mb-2"
+                                            :class="{
+                                                'opacity-25':
+                                                    form.processing,
+                                            }"
+                                            :disabled="form.processing"
+                                        >
+                                            Sign in
+                                        </button>
+                                        <!-- <span
+                                            class="text-dark dark-color d-inline-block line-height-2"
+                                            >Don't have an account?
+                                            <a href="#">Sign up</a></span
+                                        > -->
+                                    </div>
+                                </form>
                             </div>
-                            <div
+                        </div>
+                            <!-- <div
                                 class="col-md-7 text-center sign-in-page-image"
                             >
                                 <div class="sign-in-detail text-white">
@@ -181,8 +220,7 @@ const submit = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div> -->
                     </div>
                 </div>
             </div>

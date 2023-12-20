@@ -54,6 +54,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Bank Ref</th>
                                                 <th>Level</th>
                                                 <th>Join Date</th>
                                                 <th>Action</th>
@@ -71,6 +72,7 @@
                                                         item.last_name
                                                     }}
                                                 </td>
+                                                <td>{{ item.bank_ref }}</td>
                                                 <td>{{ item.level_id }}</td>
 
                                                 <td>

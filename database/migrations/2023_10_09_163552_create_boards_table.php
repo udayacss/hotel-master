@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('from_board_id');
             $table->unsignedBigInteger('level_id');
             $table->string('code');
             $table->string('name');

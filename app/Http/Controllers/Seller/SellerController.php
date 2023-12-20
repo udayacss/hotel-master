@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Rules\ReferralRule;
 use App\Services\BoardService;
 use App\Services\ReferralService;
+use App\Services\RoleService;
 use Auth;
 use DB;
 use Hash;
@@ -21,9 +22,11 @@ class SellerController extends Controller
 {
     public function list()
     {
-        $sellers = Seller::with('referral', 'user')
+        $sellers = Seller::with('referral', 'user', 'refNo')
+            ->withSum('earningsBalance', 'points')
             ->where('is_active', Status::SELLER_ACTIVE)
-            ->get();
+            ->orderBy('id', 'desc')
+            ->paginate(20);
         return Inertia::render('Admin/Seller/List', compact('sellers'));
     }
 
@@ -46,15 +49,41 @@ class SellerController extends Controller
 
         $request->validate($rules);
 
-        DB::beginTransaction();
+        $this->saveSeller($request);
 
+        return response()->json(['success' => true]);
+    }
+    public function storeGuest(Request $request)
+    {
+        $rules = [
+            'referral' => ['required', new ReferralRule()],
+            'first_name' => 'required',
+            'last_name' => 'required',
+            // 'level_id' => 'required',
+            'email' => 'required',
+            'bank_ref' => 'required',
+            'mobile_no' => 'required',
+        ];
+
+        $request->validate($rules);
+
+        $this->saveSeller($request);
+
+        return response()->json(['success' => true]);
+    }
+
+    private function saveSeller(Request $request)
+    {
+
+        DB::beginTransaction();
         $user = User::create([
             'name' => $request->first_name,
             'email' => $request->email,
             'name' => $request->first_name,
+            'role' => User::NORMAL_USER,
             'password' => Hash::make('Abcd@1234'),
         ]);
-
+        $user->assignRole((new RoleService)->getGuestRole());
         $referral = (new ReferralService())->createReferral($user->id);
 
         $seller = new Seller();
@@ -65,8 +94,9 @@ class SellerController extends Controller
         $seller->my_referrel_id =  $referral->id;
 
         $referral = (new ReferralService())->getReferral($request->referral);
-
         $seller->referrer_id = $referral->user_id;
+        $ref_seller = Seller::where('user_id', $referral->user_id)->first();
+        $seller->my_reffer_seller_id = $ref_seller->id;
         $seller->save();
 
         $subscription = SellerSubcription::create([
@@ -78,11 +108,6 @@ class SellerController extends Controller
             'status' => Status::SUBSCRIPTION_INACTIVE
         ]);
 
-
-
         DB::commit();
-        return response()->json(['success' => true]);
     }
-
-  
 }

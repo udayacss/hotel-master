@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('mobile_no')->nullable();
 
+            $table->unsignedBigInteger('my_reffer_seller_id');
             $table->unsignedBigInteger('my_referrel_id');
             $table->unsignedBigInteger('referrer_id')->comment('coming from users table');
 
